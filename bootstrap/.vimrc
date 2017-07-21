@@ -1,10 +1,10 @@
-# ###############################################################################################
-# Gvim & vim - GVim is Vim with a built-in GUI, whereas plain Vim needs a terminal emulator
-# Ref:
-#     man vim
-# Note:
-#      .gvimrc & .vimrc
-# ###############################################################################################
+" ###############################################################################################
+" Gvim & vim - GVim is Vim with a built-in GUI, whereas plain Vim needs a terminal emulator
+" Ref:
+"     man vim
+" Note:
+"      .gvimrc & .vimrc
+" ###############################################################################################
 
 
 " Use the Solarized Dark theme
