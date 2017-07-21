@@ -8,3 +8,13 @@ export PATH="~/anaconda/bin:$PATH"
 
 # For brew installs
 export PATH="/usr/local/sbin:$PATH"
+
+
+# For brew installs
+export PATH="/usr/local/sbin:$PATH"
+
+# added MySQL path
+export PATH="$PATH:/usr/local/mysql/bin:"
+
+
+

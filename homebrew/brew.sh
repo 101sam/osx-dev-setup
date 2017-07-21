@@ -142,6 +142,14 @@ brew install pkg-config libffi
 brew install pandoc
 
 # ###############################################################################################
+# Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@
+# duti -x md
+$
+# ###############################################################################################
+brew install duti
+
+
+# ###############################################################################################
 # Lxml and Libxslt
 # ###############################################################################################
 brew install libxml2
@@ -152,7 +160,8 @@ brew link libxslt --force
 # ###############################################################################################
 # Install Cask
 # ###############################################################################################
-brew install caskroom/cask/brew-cask
+#brew install caskroom/cask/brew-cask
+brew install cask
 brew tap caskroom/versions
 
 # ###############################################################################################
