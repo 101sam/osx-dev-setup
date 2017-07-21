@@ -1,4 +1,5 @@
 # ###############################################################################################
+# Warning!!!       This script required few times of entering password
 #
 # ###############################################################################################
 
@@ -53,9 +54,10 @@ brew tap homebrew/versions
 
 # ###############################################################################################
 # bash-completion2
-# Warning!!!       bash-completion2 please comment out
-#                  lines 45-68 in .bash_profile
-#                  else you will have chalanges in complete command
+# Warning!!!       bash-completion2 have refrences in ~/.bash_profile  file
+#                  by defaults:
+#                              lines 45-68 in .bash_profile are comments out
+#                              un comment them based on your needs
 # ###############################################################################################
 brew install bash-completion2
 # We installed the new shell, now we have to activate it
