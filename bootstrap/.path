@@ -1,0 +1,2 @@
+# Keep you path in one place
+export PATH="~/anaconda/bin:$PATH"

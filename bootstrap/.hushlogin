@@ -1,0 +1,10 @@
+# ###############################################################################################
+# The mere presence of this file in the home directory disables the system
+# copyright notice, the date and time of the last login, the message of the
+# day as well as other information that may otherwise appear on login.
+# Ref:
+#     `man login`
+# Note:
+#       more /etc/motd - Text for banner includes important information such as policy and downtime
+#       motd stands for "message of the day"
+# ###############################################################################################
