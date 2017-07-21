@@ -162,6 +162,7 @@ brew cask install --appdir="/Applications" alfred
 brew cask install --appdir="~/Applications" iterm2
 brew cask install --appdir="~/Applications" java
 brew cask install --appdir="~/Applications" xquartz
+brew cask install --appdir="~/Applications" pycharm-ce
 
 
 
@@ -169,11 +170,28 @@ brew cask install --appdir="~/Applications" xquartz
 brew cask install --appdir="/Applications" virtualbox
 #brew cask install --appdir="/Applications" vmware-fusion
 
+
 # Development tool casks
 brew cask install --appdir="/Applications" sublime-text
 brew cask install --appdir="/Applications" atom
 brew cask install --appdir="/Applications" vagrant
 brew cask install --appdir="/Applications" macdown
+
+
+#brew cask install --appdir="~/Applications" eclipse-cpp
+#brew cask install --appdir="~/Applications" eclipse-ide
+#brew cask install --appdir="~/Applications" eclipse-installer
+#brew cask install --appdir="~/Applications" eclipse-java
+#brew cask install --appdir="~/Applications" eclipse-jee
+#brew cask install --appdir="~/Applications" eclipse-modeling
+#brew cask install --appdir="~/Applications" eclipse-php
+#brew cask install --appdir="~/Applications" eclipse-platform
+#brew cask install --appdir="~/Applications" eclipse-ptp
+#brew cask install --appdir="~/Applications" eclipse-rcp
+#brew cask install --appdir="~/Applications" eclipse-smarthome-designer
+#brew cask install --appdir="~/Applications" netbeans
+#brew cask install --appdir="~/Applications" rstudio
+#brew cask install --appdir="~/Applications" rstudio-server
 
 
 # Misc casks
