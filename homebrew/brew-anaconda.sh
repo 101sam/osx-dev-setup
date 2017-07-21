@@ -1,5 +1,6 @@
 # ###############################################################################################
-# Warning!!!       If you plan to install Anaconda do not run this script
+# Warning!!!       This will install anconda in /usr/local/anaconda3
+#                                    and NOT in ~/anaconda3 (local path)
 # ###############################################################################################
 
 #!/usr/bin/env bash
@@ -29,8 +30,8 @@ brew update
 brew upgrade --all
 
 # ###############################################################################################
-# Install Python
+# Install latest anaconda python pachages
 # ###############################################################################################
 
 #brew install python
-brew cask install --appdir="~/anaconda" anaconda
+brew cask install anaconda
