@@ -1,5 +1,7 @@
 # osX development setup
-
+<p align="center">
+<img src="http://www.limitlessv.com/wp-content/uploads/2015/06/logo-alt-300x200.png" />
+</p>
 ## A automated setup scripts when you setup new computer.
 
 ### Geting started:
