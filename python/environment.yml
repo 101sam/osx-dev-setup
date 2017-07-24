@@ -193,7 +193,7 @@ dependencies:
 - singledispatch
 - sip
 - six
-- sklearn
+- scikit-learn
 - snakeviz
 - snowballstemmer
 - sockjs-tornado
