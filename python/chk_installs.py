@@ -9,6 +9,9 @@ import platform
 
 import importlib
 
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 # from importlib.util import warnings
 # warnings.showwarning=False
 
