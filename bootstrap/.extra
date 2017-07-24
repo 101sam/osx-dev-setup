@@ -11,7 +11,7 @@ git config --global user.email "$GIT_AUTHOR_EMAIL"
 # Note: The flag not working when using anaconda
 
 # Pip should only run if there is a virtualenv currently activated
-export PIP_REQUIRE_VIRTUALENV=true
+#export PIP_REQUIRE_VIRTUALENV=true
 
 # Install or upgrade a global package
 # Usage: gpip install –upgrade pip setuptools virtualenv

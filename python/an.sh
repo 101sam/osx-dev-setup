@@ -14,3 +14,29 @@ echo # For anaconda >> ~/.path
 echo export PATH='~/anaconda3/bin:$PATH' >> ~/.path
 
 
+###############################################################################
+# Python 2 Virtual Enviroment
+# conda env export --name root | grep -v "^prefix: " > environment.yml
+# http://tdhopper.com/blog/2015/Nov/24/my-python-environment-workflow-with-conda/
+# https://stackoverflow.com/questions/41274007/anaconda-export-environment-file
+###############################################################################
+
+echo "------------------------------"
+echo "Setting up py27 virtual environment."
+conda env create --name py27 python=2.7 -f environment.yml
+
+source activate py27
+
+
+###############################################################################
+# Python 3 Virtual Enviroment                                                 #
+###############################################################################
+
+echo "------------------------------"
+echo "Setting up py36 virtual environment."
+
+
+conda create --name py36 python=3.6
+source activate py36
+
+
