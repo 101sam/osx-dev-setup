@@ -6,21 +6,25 @@
 
 ### Geting started:
 
+Clone the repository using git:
+ 
+	$ cd ~; mkdir projects; cd projects
+	$ git clone https://github.com/limitlessv/osx-dev-setup.git
 
-Run osX system updates:
+### Step 1.0 - Run osX system updates:
 
     $ source prepareOS.sh
 
-Run Configuration:
+### Step 1.1 - Run Configuration:
 
     $ source bootstrap/bootstrap.sh
 
-Run Homebrew:
+### Step 1.2 - Run Homebrew:
 
     $ source homebrew/brew.sh
     $ source homebrew/brew-CTF.sh
 
-Run osx to configure your desktop for development:
+### Step 1.3 - Run osx to configure your desktop for development:
 
     $ source osx/osx.sh
 
