@@ -58,7 +58,7 @@ Clone the repository using git:
 * skype
 * slack
 * dropbox
-* google-drive
+* google-backup-and-sync (formaly named google-drive)
 * evernote
 * 1password
 * gimp
