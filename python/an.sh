@@ -13,6 +13,7 @@ export PATH="~/anaconda3/bin:$PATH"
 echo # For anaconda >> ~/.path
 echo export PATH='~/anaconda3/bin:$PATH' >> ~/.path
 
+#brew install boost-python --with-python3
 
 ###############################################################################
 # Python 2 Virtual Enviroment
@@ -39,4 +40,11 @@ echo "Setting up py36 virtual environment."
 conda create --name py36 python=3.6
 source activate py36
 
+
+
+'''
+python-linkedin
+http://thinktostart.com/download-your-linkedin-contacts-with-python/
+
+'''
 

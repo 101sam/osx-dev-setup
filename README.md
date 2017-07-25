@@ -24,7 +24,51 @@ Run osx to configure your desktop for development:
 
     $ source osx/osx.sh
 
-## Python:
+### Tools, IDEs, and Other Software Installed at the ned of this process.
+* git
+* git-lfs
+* git-flow
+* git-extras
+* github-desktop
+* python
+* wget, grep, openssh, screen, lynx, p7zip, ssh-copy-id, tree, bash-completion2, rsync
+* dropbox
+* firefox
+* google-chrome
+* Sublime 3
+* vagrant
+* vagrant-manager
+* VMware Fusion (will require a key upon launch or use 30-day free trial)
+* virtualbox
+* webstorm
+* intellij-idea / pycharm-ce
+* atom
+* iterm2
+* alfred
+* java
+* xquartz
+* vagrant
+* macdown
+* rstudio
+* rstudio-server
+* skype
+* slack
+* dropbox
+* google-drive
+* evernote
+* 1password
+* gimp
+* paintbrush
+* vlc
+* whatsapp
+* google-hangouts
+* docker, boot2docker
+* gcc --without-multilib
+* cmake
+* imagemagick --with-webp
+
+
+## Python: - Warning still under works
 There are many ways to seup python on the computer.
 Our focus on 3 methods:
 
@@ -40,8 +84,6 @@ Anaconda using brew will install:
 
     $anaconda installs files under "/usr/local"
 
-
-
 ## Insperation:
 
 
@@ -49,3 +91,8 @@ Heavily inspired by the works from:
 
 * https://github.com/necolas/dotfiles
 * https://github.com/donnemartin/dev-setup
+
+and many others projects such as:
+* https://gist.github.com/t-io/8255711
+* https://github.com/svett/mac-osx-dev-setup
+* https://github.com/StriveForBest/osx-dev-environment-setup

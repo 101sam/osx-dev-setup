@@ -140,6 +140,10 @@ brew install webkit2png
 brew install zopfli
 brew install pkg-config libffi
 brew install pandoc
+# For mosot of the machine learning we need gcc  --without-multilib
+brew install gcc --without-multilib
+brew install cmake
+#brew install boost-python --with-python3
 
 # ###############################################################################################
 # Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@
@@ -203,8 +207,19 @@ brew cask install --appdir="/Applications" macdown
 #brew cask install --appdir="~/Applications" rstudio-server
 
 
-# Misc casks
+# Google
 brew cask install --appdir="/Applications" google-chrome
+brew cask install --appdir="/Applications" google-drive
+#brew cask install --appdir="/Applications" google-music-manager
+#brew cask install --appdir="/Applications" google-earth
+brew cask install --appdir="/Applications" google-hangouts
+# -hangouts.rb
+
+# Messaging
+brew cask install --appdir="/Applications" whatsapp
+
+
+# Misc casks
 brew cask install --appdir="/Applications" firefox
 brew cask install --appdir="/Applications" skype
 brew cask install --appdir="/Applications" slack
@@ -214,6 +229,7 @@ brew cask install --appdir="/Applications" 1password
 brew cask install --appdir="/Applications" gimp
 brew cask install --appdir="/Applications" paintbrush
 brew cask install --appdir="/Applications" vlc
+brew cask install --appdir="/Applications" github-desktop
 
 #brew cask install --appdir="/Applications" inkscape
 

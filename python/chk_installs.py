@@ -8,9 +8,12 @@ from __future__ import absolute_import, division
 import platform
 
 import importlib
-
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+
+def fxn():
+    warnings.warn("deprecated", DeprecationWarning)
+
 
 # from importlib.util import warnings
 # warnings.showwarning=False
@@ -70,7 +73,10 @@ def chk_if_installed(verbose=0):
 
 if __name__ == "__main__":
     print("Python version:",platform.python_version())
-    chk_if_installed(verbose=0)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        warnings.filterwarnings("ignore")
+        chk_if_installed(verbose=0)
 
 
 
