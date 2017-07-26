@@ -4,6 +4,11 @@
 
 cd "$(dirname "${BASH_SOURCE}")";
 
+# Permission denied: '/Library/Python/2.7/site-packages
+# In some of the vanila setup the premisions need to be fix
+sudo chown -R $USER /Library/Python/
+
+
 # Install Python
 brew install python
 brew install python3
@@ -29,6 +34,12 @@ echo "Setting up virtual environments."
 # Install virtual environments globally
 # It fails to install virtualenv if PIP_REQUIRE_VIRTUALENV was true
 export PIP_REQUIRE_VIRTUALENV=false
+
+#
+# https://stackoverflow.com/questions/31900008/oserror-errno-1-operation-not-permitted-when-installing-scrapy-in-osx-10-11
+#
+pip install --ignore-installed six
+
 pip install virtualenv
 pip install virtualenvwrapper
 
@@ -42,8 +53,27 @@ echo "" >> $EXTRA_PATH
 echo "# Source virtualenvwrapper, added by pydata.sh" >> $EXTRA_PATH
 echo "export WORKON_HOME=~/.virtualenvs" >> $EXTRA_PATH
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> $EXTRA_PATH
+
+echo "" >> $EXTRA_PATH
+echo "" >> $EXTRA_PATH
+echo "# Pip should only run if there is a virtualenv currently activated" >> $EXTRA_PATH
+echo "export PIP_REQUIRE_VIRTUALENV=true" >> $EXTRA_PATH
+echo "" >> $EXTRA_PATH
+echo "" >> $EXTRA_PATH
+
 echo "" >> $BASH_PROFILE_PATH
 source $EXTRA_PATH
+
+/var/folders
+
+
+
+
+
+
+
+
+
 
 ###############################################################################
 # Python 2 Virtual Enviroment                                                 #

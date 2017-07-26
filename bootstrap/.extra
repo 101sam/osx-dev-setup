@@ -10,9 +10,6 @@ git config --global user.email "$GIT_AUTHOR_EMAIL"
 # https://conda.io/docs/_downloads/conda-pip-virtualenv-translator.html
 # Note: The flag not working when using anaconda
 
-# Pip should only run if there is a virtualenv currently activated
-#export PIP_REQUIRE_VIRTUALENV=true
-
 # Install or upgrade a global package
 # Usage: gpip install –upgrade pip setuptools virtualenv
 gpip(){
