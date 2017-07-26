@@ -18,8 +18,8 @@ function runDots() {
             echo ""
             cd ~ && curl -#L https://github.com/limitlessv/osx-dev-setup/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,LICENSE}
         fi
-        if [ $ARG == "osxprep" ] || [ $ARG == "all" ]; then
-            # Run the osxprep.sh Script
+        if [ $ARG == "prepareOS" ] || [ $ARG == "all" ]; then
+            # Run the prepareOS.sh Script
             echo ""
             echo "------------------------------"
             echo "Updating OSX and installing Xcode command line tools"

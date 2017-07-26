@@ -2,6 +2,13 @@
 
 # ~/pydata.sh
 
+cd "$(dirname "${BASH_SOURCE}")";
+
+# Install Python
+brew install python
+brew install python3
+
+
 # Removed user's cached credentials
 # This script might be run with .dots, which uses elevated privileges
 sudo -K
@@ -108,3 +115,4 @@ echo "------------------------------"
 echo "Script completed."
 echo "Usage: workon py27 for Python2"
 echo "Usage: workon py36 for Python3"
+cd ..
