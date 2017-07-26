@@ -104,6 +104,35 @@ pip install sqlalchemy
 pip install mysql-python
 
 ###############################################################################
+# Machine learning
+###############################################################################
+pip install future
+pip install tqdm
+pip install nltk
+pip install mxnet
+pip install statsmodels
+pip install tensorflow
+pip install theano
+pip install keras
+pip install lightgbm
+pip install dlib
+pip install polyglot
+pip install seaborn
+
+pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl
+pip install torchvision
+# OSX Binaries dont support CUDA, install from source if CUDA is needed
+
+
+
+git clone --recursive https://github.com/dmlc/xgboost
+cd xgboost; cp make/minimum.mk ./config.mk; make -j4
+
+cd python-package; python setup.py install
+cd ../..
+
+
+###############################################################################
 # Python 3 Virtual Enviroment                                                 #
 ###############################################################################
 
@@ -157,6 +186,17 @@ cd xgboost; cp make/minimum.mk ./config.mk; make -j4
 cd python-package; python setup.py install
 cd ../..
 
+
+brew install cmake pkg-config
+brew install jpeg libpng libtiff openexr
+brew install eigen tbb
+brew install gtk+3 boost
+#brew cask install xquartz
+
+#brew tap homebrew/science
+#brew install opencv3 --with-contrib --with-python
+
+
 #
 ###############################################################################
 
@@ -166,8 +206,8 @@ brew install eigen tbb
 brew install gtk+3 boost
 #brew cask install xquartz
 
-brew tap homebrew/science
-brew install opencv3 --with-contrib --with-python3
+#brew tap homebrew/science
+#brew install opencv3 --with-contrib --with-python3
 
 ###############################################################################
 
