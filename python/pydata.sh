@@ -159,6 +159,16 @@ pip install Flask
 pip install sqlalchemy
 #pip install mysql-python  # Python 2 only, use mysqlclient instead
 pip install mysqlclient
+
+##
+pip install cython
+pip install jupyter
+
+pip install pandas-datareader
+pip install pandocfilters
+pip install numpydoc
+pip install pandas-datareader
+pip install pandocfilters
 ###############################################################################
 # Machine learning
 ###############################################################################
@@ -225,6 +235,14 @@ cp -r ../init/profile_default/ ~/.ipython/profile_default
 
 echo "------------------------------"
 echo "Script completed."
-echo "Usage: workon py27 for Python2"
-echo "Usage: workon py36 for Python3"
+echo "To activate py27 use:"
+echo "      workon py27"
+echo ""
+echo "To activate py36 use:"
+echo "      workon py36"
+echo ""
+echo "To deactivate virtual env"
+echo "      deactivate"
+
+
 cd ..
