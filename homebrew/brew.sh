@@ -209,10 +209,11 @@ brew cask install --appdir="/Applications" macdown
 
 # Google
 brew cask install --appdir="/Applications" google-chrome
-brew cask install --appdir="/Applications" google-drive
+brew cask install --appdir="/Applications" google-backup-and-sync
 #brew cask install --appdir="/Applications" google-music-manager
 #brew cask install --appdir="/Applications" google-earth
 brew cask install --appdir="/Applications" google-hangouts
+
 # -hangouts.rb
 
 # Messaging

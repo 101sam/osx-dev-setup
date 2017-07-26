@@ -13,3 +13,13 @@ export PATH="~/anaconda3/bin:$PATH"
 echo # For anaconda >> ~/.path
 echo export PATH='~/anaconda3/bin:$PATH' >> ~/.path
 
+
+# Update anaconda root enviroment to the latest
+conda update -y --all
+
+# Clean old packages and free memory
+conda clean -y --all
+
+# Install importent packages
+conda install -y future
+
