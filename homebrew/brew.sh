@@ -159,7 +159,7 @@ brew install pandoc
 # For mosot of the machine learning we need gcc  --without-multilib
 brew install gcc --without-multilib
 brew install cmake
-#brew install boost-python --with-python3
+brew install boost-python --with-python3
 
 # ###############################################################################################
 # Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@
