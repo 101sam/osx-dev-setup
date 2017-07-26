@@ -96,6 +96,21 @@ brew install ringojs
 brew install narwhal
 
 # ###############################################################################################
+# Install Python
+# ###############################################################################################
+brew install python
+brew install python3
+
+# ###############################################################################################
+# Install ruby-build and rbenv
+# ###############################################################################################
+brew install ruby-build
+brew install rbenv
+LINE='eval "$(rbenv init -)"'
+grep -q "$LINE" ~/.extra || echo "$LINE" >> ~/.extra
+
+
+# ###############################################################################################
 # Install more recent versions of some OS X tools.
 # ###############################################################################################
 
@@ -104,6 +119,7 @@ brew install homebrew/dupes/grep
 brew install homebrew/dupes/openssh
 brew install homebrew/dupes/screen
 
+brew install homebrew/php/php55 --with-gmp
 
 # ###############################################################################################
 # Install font tools.
