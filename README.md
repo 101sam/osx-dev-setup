@@ -88,6 +88,10 @@ Anaconda using brew will install:
 
     $ anaconda installs files under "/usr/local"
 
+Read more on conda vs. pip vs. virtualenv:
+* https://conda.io/docs/_downloads/conda-pip-virtualenv-translator.html
+
+
 
 ## Run ALL:
     $ cd ~; mkdir projects; cd projects; git clone https://github.com/limitlessv/osx-dev-setup.git
