@@ -36,3 +36,4 @@ brew cask install --appdir="/Applications" sequel-pro
 
 # Remove outdated versions from the cellar.
 brew cleanup
+

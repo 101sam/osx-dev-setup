@@ -86,7 +86,13 @@ A personal prefered method **Ananconda - local instellations**:
 
 Anaconda using brew will install:
 
-    $anaconda installs files under "/usr/local"
+    $ anaconda installs files under "/usr/local"
+
+
+## Run ALL:
+    $ cd ~; mkdir projects; cd projects; git clone https://github.com/limitlessv/osx-dev-setup.git
+    $ cd ~/projects/osx-dev-setup/; source prepareOS.sh; source bootstrap/bootstrap.sh; source homebrew/brew.sh;  source homebrew/brew-CTF.sh; source osx/osx.sh; source python/pydata.sh; source databases/dbTools.sh;
+
 
 ## Insperation:
 
