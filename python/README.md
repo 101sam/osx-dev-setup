@@ -11,7 +11,7 @@ These are the basic libraries that transform Python from a general purpose progr
 * matplotlib is the standard Python library for creating 2D plots and graphs. It’s pretty low-level, meaning it requires more commands to generate nice-looking graphs and figures than with some more advanced libraries. However, the flip side of that is flexibility. With enough commands, you can make just about any kind of graph you want with matplotlib.
 
 
-##Libraries for Machine Learning
+## Libraries for Machine Learning
 
 Machine learning sits at the intersection of Artificial Intelligence and statistical analysis. By training computers with sets of real-world data, we’re able to create algorithms that make more accurate and sophisticated predictions, whether we’re talking about getting better driving directions or building computers that can identify landmarks just from looking at pictures. The following libraries give Python the ability to tackle a number of machine learning tasks, from performing basic regressions to training complex neural networks.
 
@@ -20,7 +20,7 @@ Machine learning sits at the intersection of Artificial Intelligence and statist
 * TensorFlow is another high-profile entrant into machine learning, developed by Google as an open-source successor to DistBelief, their previous framework for training neural networks. TensorFlow uses a system of multi-layered nodes that allow you to quickly set up, train, and deploy artificial neural networks with large datasets. It’s what allows Google to identify objects in photos or understand spoken words in its voice-recognition app.
 
 
-##Libraries for Data Mining and Natural Language Processing
+## Libraries for Data Mining and Natural Language Processing
 
 What if your business doesn’t have the luxury of accessing massive datasets? For many businesses, the data they need isn’t something that can be passively gathered—it has to be extracted either from documents or webpages. The following tools are designed for a variety of related tasks, from mining valuable information from websites to turning natural language into data you can use.
 
@@ -29,7 +29,7 @@ What if your business doesn’t have the luxury of accessing massive datasets? F
 * Pattern combines the functionality of Scrapy and NLTK in a massive library designed to serve as an out-of-the-box solution for web mining, NLP, machine learning, and network analysis. Its tools include a web crawler; APIs for Google, Twitter, and Wikipedia; and text-analysis algorithms like parse trees and sentiment analysis that can be performed with just a few lines of code.
 
 
-##Libraries for Plotting and Visualizations
+## Libraries for Plotting and Visualizations
 
 The best and most sophisticated analysis is meaningless if you can’t communicate it to other people. These libraries build on matplotlib to enable you to easily create more visually compelling and sophisticated graphs, charts, and maps, no matter what kind of analysis you’re trying to do.
 
