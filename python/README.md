@@ -12,11 +12,13 @@ These are the basic libraries that transform Python from a general purpose progr
 
 
 ##Libraries for Machine Learning
+
 Machine learning sits at the intersection of Artificial Intelligence and statistical analysis. By training computers with sets of real-world data, we’re able to create algorithms that make more accurate and sophisticated predictions, whether we’re talking about getting better driving directions or building computers that can identify landmarks just from looking at pictures. The following libraries give Python the ability to tackle a number of machine learning tasks, from performing basic regressions to training complex neural networks.
 
 * scikit-learn builds on NumPy and SciPy by adding a set of algorithms for common machine learning and data mining tasks, including clustering, regression, and classification. As a library, scikit-learn has a lot going for it. Its tools are well-documented and its contributors include many machine learning experts. What’s more, it’s a very curated library, meaning developers won’t have to choose between different versions of the same algorithm. Its power and ease of use make it popular with a lot of data-heavy startups, including Evernote, OKCupid, Spotify, and Birchbox.
 * Theano uses NumPy-like syntax to optimize and evaluate mathematical expressions. What sets Theano apart is that it takes advantage of the computer’s GPU in order to make data-intensive calculations up to 100x faster than the CPU alone. Theano’s speed makes it especially valuable for deep learning and other computationally complex tasks.
 * TensorFlow is another high-profile entrant into machine learning, developed by Google as an open-source successor to DistBelief, their previous framework for training neural networks. TensorFlow uses a system of multi-layered nodes that allow you to quickly set up, train, and deploy artificial neural networks with large datasets. It’s what allows Google to identify objects in photos or understand spoken words in its voice-recognition app.
+
 
 ##Libraries for Data Mining and Natural Language Processing
 
@@ -25,7 +27,6 @@ What if your business doesn’t have the luxury of accessing massive datasets? F
 * Scrapy is an aptly named library for creating spider bots to systematically crawl the web and extract structured data like prices, contact info, and URLs. Originally designed for web scraping, Scrapy can also extract data from APIs.
 * NLTK is a set of libraries designed for Natural Language Processing (NLP). NLTK’s basic functions allow you to tag text, identify named entities, and display parse trees, which are like sentence diagrams that reveal parts of speech and dependencies. From there, you can do more complicated things like sentiment analysis and automatic summarization. It also comes with an entire book’s worth of material about analyzing text with NLTK.
 * Pattern combines the functionality of Scrapy and NLTK in a massive library designed to serve as an out-of-the-box solution for web mining, NLP, machine learning, and network analysis. Its tools include a web crawler; APIs for Google, Twitter, and Wikipedia; and text-analysis algorithms like parse trees and sentiment analysis that can be performed with just a few lines of code.
-
 
 
 ##Libraries for Plotting and Visualizations
