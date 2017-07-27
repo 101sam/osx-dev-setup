@@ -36,6 +36,17 @@ conda install -y future
 brew install ta-lib
 brew install icu4c
 
+brew install cmake pkg-config
+brew install jpeg libpng libtiff openexr
+brew install eigen tbb
+brew install gtk+3 boost
+
+#brew cask install xquartz
+#brew tap homebrew/science
+#brew install opencv3 --with-contrib --with-python3
+
+
+
 echo "Step 03:"
 
 
@@ -74,19 +85,19 @@ cd python-package; python setup.py install
 cd ../..
 
 echo "Step 08:"
-
+# Re insurance due the depandacy orders some of those package my need to re-install
+pip install tensorflow
+pip install polyglot
+pip install tqdm
+pip install nltk
+pip install mxnet
+pip install theano
+pip install keras
+pip install lightgbm
 
 #
 ###############################################################################
 
-brew install cmake pkg-config
-
-brew install jpeg libpng libtiff openexr
-brew install eigen tbb
-brew install gtk+3 boost
-#brew cask install xquartz
-#brew tap homebrew/science
-#brew install opencv3 --with-contrib --with-python3
 echo "Step 09:"
 
 conda clean -y --all
@@ -120,6 +131,7 @@ cd python-package; python setup.py install
 cd ../..
 echo "Step 15:"
 
+pip install polyglot
 
 # Clean up
 rm -Rf xgboost

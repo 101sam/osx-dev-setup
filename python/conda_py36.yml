@@ -67,7 +67,6 @@ dependencies:
     - keras
     - lightgbm
     - dlib
-    - polyglot
     - ta-lib
     - IbPy2
     - pyfolio
@@ -75,4 +74,3 @@ dependencies:
     - hyperopt
     - kivy
     - prettytable
-    - Pattern
