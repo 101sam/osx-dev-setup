@@ -1,0 +1,57 @@
+name: py36
+channels:
+- soumith
+- menpo
+- conda-forge
+- anaconda-fusion
+- defaults
+dependencies:
+- python=3.6
+- defaults::numpy
+- defaults::numpydoc
+- defaults::pandas
+- defaults::pandas-datareader
+- defaults::pandocfilters
+- defaults::pandas-datareader
+- defaults::pandocfilters
+- defaults::scipy
+- defaults::matplotlib
+- defaults::scikit-learn
+- defaults::scikit-image
+- defaults::ipython
+- defaults::ipykernel
+- defaults::cython
+- defaults::jupyter
+- defaults::qt
+- defaults::sympy
+- defaults::nose
+- defaults::seaborn
+- defaults::bokeh
+- defaults::Flask
+- defaults::sqlalchemy
+- defaults::future
+- menpo::dlib
+- pip:
+    - cookiecutter
+    - pip-review
+    - pip-tools
+    - PyMySQL
+    - python-wordpress-xmlrpc
+    - tox
+    - tox-travis
+    - twine
+    - twython
+    - versioneer
+    - yahoo-finance
+    - packaging
+    - tqdm
+    - nltk
+    - mxnet
+    - statsmodels
+    - tensorflow
+    - theano
+    - keras
+    - lightgbm
+    - dlib
+    - polyglot
+    - ta-lib

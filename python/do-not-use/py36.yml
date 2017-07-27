@@ -7,7 +7,26 @@ channels:
 dependencies:
 - python=3.6
 - numpy
- - scipy
+- numpydoc
+- pandas
+- pandas-datareader
+- pandocfilters
+- pandas-datareader
+- pandocfilters
+- scipy
 - matplotlib
 - scikit-learn
 - scikit-image
+- ipython
+- ipykernel
+- cython
+- jupyter
+- sympy
+- nose
+- seaborn
+- bokeh
+- Flask
+- sqlalchemy
+- future
+
+
