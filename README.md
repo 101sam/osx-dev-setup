@@ -129,9 +129,11 @@ and many others projects such as:
 * https://github.com/StriveForBest/osx-dev-environment-setup
 
 
-## Release History
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-[CHANGES](CHANGES.md)
+## Release History
+see the [CHANGES](CHANGES.md).
 
 
 
