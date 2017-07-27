@@ -1,8 +1,27 @@
-# osX development setup
-<p align="center">
-<img src="http://www.limitlessv.com/wp-content/uploads/2015/06/logo-alt-300x200.png" />
-</p>
-## A automated setup scripts when you setup new computer.
+![LimitlessV logo](http://www.limitlessv.com/wp-content/uploads/2015/06/logo-alt-300x200.png)
+
+# Scripts used to setup Mac OS X development environment
+
+ 
+A automated setup scripts when you setup new computer.
+
+The challenges when you setup your workstation to development mode is time-consuming. I used this repository to setup my development machine.
+
+```
+Warning!
+Some of the steps require manual changes read the instructions.
+```
+
+>This setup targets the following area:
+
+
+>* Python 2.7 & 3.6 with Virtual Environments.
+>* Machine learning & Deep learning using Python 2.7 & 3.6.
+>* Packages to solved trading strategies & finance challenges.
+>* Packages for face recognition.
+>* Databases and Datasets.
+>
+>
 
 ### Geting started:
 
