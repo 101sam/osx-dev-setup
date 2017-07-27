@@ -115,7 +115,7 @@ and many others projects such as:
 
 ## Release History
 
-[CHANGES.md](https://github.com/limitlessv/osx-dev-setup/blob/master/CHANGES.md)
+[CHANGES](https://github.com/limitlessv/osx-dev-setup/blob/master/CHANGES.md)
 
 
 
