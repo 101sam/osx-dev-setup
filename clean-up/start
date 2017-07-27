@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 function runDots() {
     # Ask for the administrator password upfront
     sudo -v
@@ -18,8 +16,7 @@ function runDots() {
             echo "Syncing the dev-setup repo to your local machine."
             echo "------------------------------"
             echo ""
-            # cd ~ && curl -#L https://github.com/limitlessv/osx-dev-setup/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,LICENSE}
-            bootstrap/bootstrap.sh
+            cd ~ && curl -#L https://github.com/limitlessv/osx-dev-setup/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,LICENSE}
         fi
         if [ $ARG == "prepareOS" ] || [ $ARG == "all" ]; then
             # Run the prepareOS.sh Script
@@ -28,7 +25,7 @@ function runDots() {
             echo "Updating OSX and installing Xcode command line tools"
             echo "------------------------------"
             echo ""
-            osx/prepareOS.sh
+            ./osxprep.sh
         fi
         if [ $ARG == "brew" ] || [ $ARG == "all" ]; then
             # Run the brew.sh Script
@@ -41,20 +38,7 @@ function runDots() {
             echo "This might awhile to complete, as some formulae need to be installed from source."
             echo "------------------------------"
             echo ""
-            homebrew/brew.sh
-        fi
-        if [ $ARG == "brewCTF" ] || [ $ARG == "all" ]; then
-            # Run the brew-CTF.sh Script
-            # For a full listing of installed formulae and apps, refer to
-            # the commented brew.sh source file directly and tweak it to
-            # suit your needs.
-            echo ""
-            echo "------------------------------"
-            echo "Installing Homebrew along with some common formulae and apps."
-            echo "This might awhile to complete, as some formulae need to be installed from source."
-            echo "------------------------------"
-            echo ""
-            homebrew/brew-CTF.sh
+            ./brew.sh
         fi
         if [ $ARG == "osx" ] || [ $ARG == "all" ]; then
             # Run the osx.sh Script
@@ -69,30 +53,52 @@ function runDots() {
             echo "Setting sensible OSX defaults."
             echo "------------------------------"
             echo ""
-            osx/osx.sh
+            ./osx.sh
         fi
-        if [ $ARG == "anaconda" ] || [ $ARG == "all" ]; then
-            # Run the pyAnaconda.sh Script
-            # I strongly suggest you read through the commented pyAnaconda.sh
-            echo ""
-            echo "------------------------------"
-            echo "Setting up Python anaconda."
-            echo "------------------------------"
-            echo ""
-            python/pyAnaconda.sh
-        fi
-        if [ $ARG == "pydata" ]; then
+        if [ $ARG == "pydata" ] || [ $ARG == "all" ]; then
             # Run the pydata.sh Script
             echo "------------------------------"
             echo "Setting up Python data development environment."
             echo "------------------------------"
             echo ""
-            python/pydata.sh
+            ./pydata.sh
+        fi
+        if [ $ARG == "aws" ] || [ $ARG == "all" ]; then
+            # Run the aws.sh Script
+            echo "------------------------------"
+            echo "Setting up AWS development environment."
+            echo "------------------------------"
+            echo ""
+            ./aws.sh
+        fi
+        if [ $ARG == "datastores" ] || [ $ARG == "all" ]; then
+            # Run the datastores.sh Script
+            echo "------------------------------"
+            echo "Setting up data stores."
+            echo "------------------------------"
+            echo ""
+            ./datastores.sh
+        fi
+        if [ $ARG == "web" ] || [ $ARG == "all" ]; then
+            # Run the web.sh Script
+            echo "------------------------------"
+            echo "Setting up JavaScript web development environment."
+            echo "------------------------------"
+            echo ""
+            ./web.sh
+        fi
+        if [ $ARG == "android" ] || [ $ARG == "all" ]; then
+            # Run the android.sh Script
+            echo "------------------------------"
+            echo "Setting up Android development environment."
+            echo "------------------------------"
+            echo ""
+            ./android.sh
         fi
     done
 
     echo "------------------------------"
-    echo "Completed running start , restart your computer to ensure all updates take effect"
+    echo "Completed running .dots, restart your computer to ensure all updates take effect"
     echo "------------------------------"
 }
 
@@ -101,10 +107,5 @@ echo "";
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     runDots $@
 fi;
-unset runDots;
 
-read -p "Restart your computer now? (y/n) " -n 1;
-echo "";
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    sudo reboot now
-fi;
+unset runDots;

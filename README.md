@@ -27,9 +27,14 @@ Clone the repository using git:
 	$ cd ~; mkdir projects; cd projects
 	$ git clone https://github.com/limitlessv/osx-dev-setup.git
 
+Run all:
+    $ ./start all
+
+
+
 ### Step 1.0 - Run osX system updates:
 
-    $ source prepareOS.sh
+    $ source osx/prepareOS.sh
 
 ### Step 1.1 - Run Configuration:
 
