@@ -1,7 +1,7 @@
 #########################################################################################
 # Limitless Virtue LLc .gitignore file to support development using github
 #
-#       Development language....: Python and R
+#       Development language....: Python and R & Shell
 #       Development Os..........: MacOS, Linux, Windows
 #       Development IDE/Tools...: Spyder
 #                                 Jupyter Notebook
@@ -19,6 +19,10 @@
 # References......:
 #           https://github.com/github/gitignore/blob/master/Python.gitignore
 #########################################################################################
+
+# For this project we add 
+.idea/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
