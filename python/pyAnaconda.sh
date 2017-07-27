@@ -27,7 +27,6 @@ conda update -y --all
 # Clean old packages and free memory
 conda clean -y --all
 
-
 echo "Step 02:"
 
 # Install importent packages
@@ -35,21 +34,49 @@ conda install -y future
 
 brew install ta-lib
 brew install icu4c
-
 brew install cmake pkg-config
 brew install jpeg libpng libtiff openexr
 brew install eigen tbb
 brew install gtk+3 boost
 
-#brew cask install xquartz
-#brew tap homebrew/science
-#brew install opencv3 --with-contrib --with-python3
-
-
-
 echo "Step 03:"
 
+###############################################################################
+# Python 2.7
+###############################################################################
+# conda create -n py27 python=2.7
+echo "Step 04:"
+conda env create -f conda_py27.yml
+echo "Step 05:"
+source activate py27
+echo "Step 06:"
 
+pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl
+pip install torchvision
+# OSX Binaries dont support CUDA, install from source if CUDA is needed
+
+echo "Step 07:"
+
+pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl
+pip install torchvision
+# OSX Binaries dont support CUDA, install from source if CUDA is needed
+
+echo "Step 08:"
+
+git clone --recursive https://github.com/dmlc/xgboost
+cd xgboost; cp make/minimum.mk ./config.mk; make -j4
+
+cd python-package; python setup.py install
+cd ../..
+echo "Step 09:"
+
+pip install polyglot
+
+# Clean up
+rm -Rf xgboost
+conda clean -y --all
+
+echo "Step 10:"
 ###############################################################################
 # We installing the enviroment using conda & pip
 # But: We also provide enviroment.yml for creating
@@ -59,32 +86,26 @@ echo "Step 03:"
 
 echo "------------------------------"
 echo "Setting up py36 virtual environment."
-
 conda env create -f conda_py36.yml
 
-echo "Step 04:"
-
-
+echo "Step 11:"
 #conda create --name py36 python=3.6
 source activate py36
 
-echo "Step 06:"
-
-
+echo "Step 12:"
 # For python 3.6
 # http://pytorch.org/
 pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp36-cp36m-macosx_10_7_x86_64.whl
 pip install torchvision
 
-echo "Step 07:"
-
-git clone --recursive https://github.com/dmlc/xgboost
+echo "Step 13:"
+# git clone --recursive https://github.com/dmlc/xgboost
 cd xgboost; cp make/minimum.mk ./config.mk; make -j4
 
 cd python-package; python setup.py install
 cd ../..
 
-echo "Step 08:"
+echo "Step 14:"
 # Re insurance due the depandacy orders some of those package my need to re-install
 pip install tensorflow
 pip install polyglot
@@ -94,55 +115,13 @@ pip install mxnet
 pip install theano
 pip install keras
 pip install lightgbm
-
-#
 ###############################################################################
-
-echo "Step 09:"
-
-conda clean -y --all
-
-###############################################################################
-# Python 2.7
-###############################################################################
-# conda create -n py27 python=2.7
-echo "Step 10:"
-conda env create -f conda_py27.yml
-echo "Step 11:"
-source activate py27
-echo "Step 12:"
-
-pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl
-pip install torchvision
-# OSX Binaries dont support CUDA, install from source if CUDA is needed
-
-echo "Step 13:"
-
-pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl
-pip install torchvision
-# OSX Binaries dont support CUDA, install from source if CUDA is needed
-
-echo "Step 14:"
-
-# git clone --recursive https://github.com/dmlc/xgboost
-cd xgboost; cp make/minimum.mk ./config.mk; make -j4
-
-cd python-package; python setup.py install
-cd ../..
 echo "Step 15:"
-
-pip install polyglot
-
-# Clean up
-rm -Rf xgboost
 conda clean -y --all
-
-echo "Step 15:"
 
 ###############################################################################
 # Install IPython Profile
 ###############################################################################
-
 echo "------------------------------"
 echo "Installing IPython Notebook Default Profile"
 
@@ -151,16 +130,6 @@ mkdir -p ~/.ipython
 cp -r ../init/profile_default/ ~/.ipython/profile_default
 
 echo "Step 16:"
-
-#    If this is your first install of dbus, automatically load on login with:
-#        mkdir -p ~/Library/LaunchAgents
-#        cp /Users/shmuelm/anaconda3/envs/py36/org.freedesktop.dbus-session.plist ~/Library/LaunchAgents/
-#        launchctl load -w ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
-#
-#    If this is an upgrade and you already have the org.freedesktop.dbus-session.plist loaded:
-#        launchctl unload -w ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
-#        cp /Users/shmuelm/anaconda3/envs/py36/org.freedesktop.dbus-session.plist ~/Library/LaunchAgents/
-#        launchctl load -w ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
 
 source deactivate
 conda clean -y --all
