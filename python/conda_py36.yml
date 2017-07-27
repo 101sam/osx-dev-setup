@@ -33,7 +33,7 @@ dependencies:
 - menpo::dlib
 - defaults::graphviz
 - defaults::pydotplus
-- defaults::beautiful-soup
+- defaults::beautifulsoup4
 - defaults::glueviz
 - defaults::more-itertools
 - defaults::Quandl
@@ -42,8 +42,7 @@ dependencies:
 - defaults::sphinx
 - defaults::ipyparallel
 - defaults::requests
-- defaults::progressbar
-- defaults::uuid
+- defaults::progressbar2
 - defaults::Basemap
 - defaults::NetworkX
 - pip:

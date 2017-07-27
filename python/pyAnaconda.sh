@@ -27,10 +27,11 @@ conda update -y --all
 # Clean old packages and free memory
 conda clean -y --all
 
-# Install importent packages
-conda install -y future
 
 echo "Step 02:"
+
+# Install importent packages
+conda install -y future
 
 brew install ta-lib
 brew install icu4c
