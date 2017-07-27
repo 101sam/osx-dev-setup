@@ -1,9 +1,6 @@
 ![LimitlessV logo](http://www.limitlessv.com/wp-content/uploads/2015/06/logo-alt-300x200.png)
 
-# Scripts used to setup Mac OS X development environment
-
- 
-A automated setup scripts when you setup new computer.
+# Scripts to use for setup development environment on Mac OS X
 
 The challenges when you setup your workstation to development mode is time-consuming. I used this repository to setup my development machine.
 
