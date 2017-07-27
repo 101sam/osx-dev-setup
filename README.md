@@ -105,6 +105,7 @@ Heavily inspired by the works from:
 
 * https://github.com/necolas/dotfiles
 * https://github.com/donnemartin/dev-setup
+* https://gist.github.com/cowboy/3118588
 
 and many others projects such as:
 * https://gist.github.com/t-io/8255711
