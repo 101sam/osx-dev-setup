@@ -63,9 +63,7 @@ brew install gtk+3 boost
 #brew tap homebrew/science
 #brew install opencv3 --with-contrib --with-python3
 
-###############################################################################
-
-
+conda clean -y --all
 
 ###############################################################################
 # Python 2.7
@@ -92,7 +90,7 @@ cd ../..
 
 # Clean up
 rm -Rf xgboost
-
+conda clean -y --all
 
 ###############################################################################
 # Install IPython Profile
@@ -116,6 +114,7 @@ cp -r ../init/profile_default/ ~/.ipython/profile_default
 #        cp /Users/shmuelm/anaconda3/envs/py36/org.freedesktop.dbus-session.plist ~/Library/LaunchAgents/
 #        launchctl load -w ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
 
+source deactivate
 conda clean -y --all
 
 echo "#"
