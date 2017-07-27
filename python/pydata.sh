@@ -233,16 +233,16 @@ echo "Installing IPython Notebook Default Profile"
 mkdir -p ~/.ipython
 cp -r ../init/profile_default/ ~/.ipython/profile_default
 
-echo "------------------------------"
-echo "Script completed."
-echo "To activate py27 use:"
-echo "      workon py27"
-echo ""
-echo "To activate py36 use:"
-echo "      workon py36"
-echo ""
-echo "To deactivate virtual env"
-echo "      deactivate"
+echo "#"
+echo "# To activate python 2.7 environment, use:"
+echo "# > workon py27"
+echo "#"
+echo "# To activate python 3.6 environment, use:"
+echo "# > workon py36"
+echo "#"
+echo "# To deactivate an active environment, use:"
+echo "# > deactivate"
+echo "#"
 
 
 cd ..
