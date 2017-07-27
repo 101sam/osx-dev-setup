@@ -12,25 +12,25 @@ function runDots() {
     # Run sections based on command line arguments
     for ARG in "$@"
     do
-        if [ $ARG == "bootstrap" ] || [ $ARG == "all" ]; then
+        if [ $ARG == "bootstrap" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
             echo ""
             echo "------------------------------"
             echo "Syncing the dev-setup repo to your local machine."
             echo "------------------------------"
             echo ""
             # cd ~ && curl -#L https://github.com/limitlessv/osx-dev-setup/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,LICENSE}
-            bootstrap/bootstrap.sh
+            source bootstrap/bootstrap.sh
         fi
-        if [ $ARG == "prepareOS" ] || [ $ARG == "all" ]; then
+        if [ $ARG == "prepareOS" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
             # Run the prepareOS.sh Script
             echo ""
             echo "------------------------------"
             echo "Updating OSX and installing Xcode command line tools"
             echo "------------------------------"
             echo ""
-            osx/prepareOS.sh
+            source osx/prepareOS.sh
         fi
-        if [ $ARG == "brew" ] || [ $ARG == "all" ]; then
+        if [ $ARG == "brew" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
             # Run the brew.sh Script
             # For a full listing of installed formulae and apps, refer to
             # the commented brew.sh source file directly and tweak it to
@@ -41,9 +41,9 @@ function runDots() {
             echo "This might awhile to complete, as some formulae need to be installed from source."
             echo "------------------------------"
             echo ""
-            homebrew/brew.sh
+            source homebrew/brew.sh
         fi
-        if [ $ARG == "brewCTF" ] || [ $ARG == "all" ]; then
+        if [ $ARG == "brewCTF" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
             # Run the brew-CTF.sh Script
             # For a full listing of installed formulae and apps, refer to
             # the commented brew.sh source file directly and tweak it to
@@ -54,9 +54,9 @@ function runDots() {
             echo "This might awhile to complete, as some formulae need to be installed from source."
             echo "------------------------------"
             echo ""
-            homebrew/brew-CTF.sh
+            source homebrew/brew-CTF.sh
         fi
-        if [ $ARG == "osx" ] || [ $ARG == "all" ]; then
+        if [ $ARG == "osx" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
             # Run the osx.sh Script
             # I strongly suggest you read through the commented osx.sh
             # source file and tweak any settings based on your personal
@@ -69,9 +69,9 @@ function runDots() {
             echo "Setting sensible OSX defaults."
             echo "------------------------------"
             echo ""
-            osx/osx.sh
+            source osx/osx.sh
         fi
-        if [ $ARG == "anaconda" ] || [ $ARG == "all" ]; then
+        if [ $ARG == "anaconda" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
             # Run the pyAnaconda.sh Script
             # I strongly suggest you read through the commented pyAnaconda.sh
             echo ""
@@ -79,7 +79,7 @@ function runDots() {
             echo "Setting up Python anaconda."
             echo "------------------------------"
             echo ""
-            python/pyAnaconda.sh
+            source python/pyAnaconda.sh
         fi
         if [ $ARG == "pydata" ]; then
             # Run the pydata.sh Script
@@ -87,7 +87,15 @@ function runDots() {
             echo "Setting up Python data development environment."
             echo "------------------------------"
             echo ""
-            python/pydata.sh
+            source python/pydata.sh
+        fi
+        if [ $ARG == "datastores" ] || [ $ARG == "all" ]; then
+            # Run the databases/dbTools.sh Script
+            echo "------------------------------"
+            echo "Setting up data stores."
+            echo "------------------------------"
+            echo ""
+            source databases/dbTools.sh
         fi
     done
 
@@ -95,6 +103,42 @@ function runDots() {
     echo "Completed running start , restart your computer to ensure all updates take effect"
     echo "------------------------------"
 }
+
+
+if [ $# -eq 0 ]; then
+    echo ""
+    echo "usage: ./start [option]"
+    echo "Options and arguments:"
+    echo ""
+    echo "+---------------------------------------------------------------------+"
+    echo "| To install ALL packages run:                                        |"
+    echo "|      ./start all                                                    |"
+    echo "+---------------------------------------------------------------------+"
+    echo "| To install the following packages [bootstrap osxprep,               |"
+    echo "|                                    brew brewCTF osx anaconda] run:  |"
+    echo "|     ./start python                                                  |"
+    echo "+---------------------------------------------------------------------+"
+    echo "| To install selected packagess run:                                  |"
+    echo "|     ./start bootstrap osxprep brew osx                              |"
+    echo "+---------------------------------------------------------------------+"
+    echo "| or:                                                                 |"
+    echo "|     ./start bootstrap osxprep brew brewCTF osx                      |"
+    echo "+---------------------------------------------------------------------+"
+    echo "| or:                                                                 |"
+    echo "|     ./start bootstrap osxprep brew brewCTF osx anaconda             |"
+    echo "+---------------------------------------------------------------------+"
+    echo "| or:                                                                 |"
+    echo "|     ./start bootstrap osxprep brew brewCTF osx pydata               |"
+    echo "+---------------------------------------------------------------------+"
+    echo "| or:                                                                 |"
+    echo "|    ./start bootstrap osxprep brew brewCTF osx anaconda datastores   |"
+    echo "+---------------------------------------------------------------------+"
+    echo "| or:                                                                 |"
+    echo "|    ./start bootstrap osxprep brew brewCTF osx pydata datastores     |"
+    echo "+---------------------------------------------------------------------+"
+    echo ""
+    exit 1
+fi
 
 read -p "This script may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
 echo "";
