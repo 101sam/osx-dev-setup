@@ -111,3 +111,11 @@ and many others projects such as:
 * https://gist.github.com/t-io/8255711
 * https://github.com/svett/mac-osx-dev-setup
 * https://github.com/StriveForBest/osx-dev-environment-setup
+
+
+## Release History
+
+<table>
+<tr><td>Date (yyyy-mm-dd):</td><td>Releases / Tags </td><td>comments</td></tr>
+<tr><td>2017-07-28</td><td>v 0.0.1</td><td>First Release</td></tr>
+<tr><td>2017-07-27</td><td>v 0.0.1b1 </td><td>Testing enviroment</td></tr>

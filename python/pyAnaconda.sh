@@ -164,9 +164,9 @@ echo "Step 16:"
 
 source deactivate
 conda clean -y --all
+cd ..
 
 echo "Step 17:"
-
 echo "#"
 echo "# To activate python 2.7 environment, use:"
 echo "# > source activate py27"
