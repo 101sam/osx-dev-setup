@@ -1,4 +1,4 @@
-name: py36
+name: py27
 channels:
 - soumith
 - menpo
@@ -6,7 +6,7 @@ channels:
 - anaconda-fusion
 - defaults
 dependencies:
-- python=3.6
+- python=2.7
 - defaults::numpy
 - defaults::numpydoc
 - defaults::pandas

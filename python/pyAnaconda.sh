@@ -51,7 +51,6 @@ cd xgboost; cp make/minimum.mk ./config.mk; make -j4
 cd python-package; python setup.py install
 cd ../..
 
-
 #
 ###############################################################################
 
@@ -65,6 +64,34 @@ brew install gtk+3 boost
 #brew install opencv3 --with-contrib --with-python3
 
 ###############################################################################
+
+
+
+###############################################################################
+# Python 2.7
+###############################################################################
+# conda create -n py27 python=2.7
+conda env create -f conda_py27.yml
+source activate py27
+
+
+pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl
+pip install torchvision
+# OSX Binaries dont support CUDA, install from source if CUDA is needed
+
+pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl
+pip install torchvision
+# OSX Binaries dont support CUDA, install from source if CUDA is needed
+
+# git clone --recursive https://github.com/dmlc/xgboost
+cd xgboost; cp make/minimum.mk ./config.mk; make -j4
+
+cd python-package; python setup.py install
+cd ../..
+
+
+# Clean up
+rm -Rf xgboost
 
 
 ###############################################################################
@@ -90,3 +117,15 @@ cp -r ../init/profile_default/ ~/.ipython/profile_default
 #        launchctl load -w ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
 
 conda clean -y --all
+
+echo "#"
+echo "# To activate python 2.7 environment, use:"
+echo "# > source activate py27"
+echo "#"
+echo "# To activate python 3.6 environment, use:"
+echo "# > source activate py36"
+echo "#"
+echo "# To deactivate an active environment, use:"
+echo "# > source deactivate"
+echo "#"
+
