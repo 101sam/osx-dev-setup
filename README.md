@@ -22,32 +22,80 @@ Some of the steps require manual changes read the instructions.
 
 ### Geting started:
 
-Clone the repository using git:
- 
+# Section 1: Installation
+### Single Setup Script
+
+#### Running with Git
+
+##### Clone the Repo
+
 	$ cd ~; mkdir projects; cd projects
-	$ git clone https://github.com/limitlessv/osx-dev-setup.git
+	$ git clone https://github.com/limitlessv/osx-dev-setup.git;cd projects; ./start all
 
-Run all:
-    $ ./start all
+##### Run the ./start Script with Command Line Arguments
+
+     usage: ./start [option]
+
+    +---------------------------------------------------------------------+
+    | To install ALL packages run:                                        |
+    |      ./start all                                                    |
+    +---------------------------------------------------------------------+
+    | To install the following packages [bootstrap,                       |
+    |                                    prepareOS,                       |
+    |                                    brew,                            |
+    |                                    brewCTF,                         |
+    |                                    osx                              |
+    |                                    anaconda]                        | 
+    |                                    run:                             |
+    |     ./start python                                                  |
+    |                                                                     |
+    | (*) Personal prefered installation, in case no need to              |
+    |    install local databases.                                         |
+    +---------------------------------------------------------------------+
+    | To install selected packagess run:                                  |
+    |     ./start bootstrap prepareOS brew osx                            |
+    +---------------------------------------------------------------------+
+    | or:                                                                 |
+    |     ./start bootstrap prepareOS brew brewCTF osx                    |
+    +---------------------------------------------------------------------+
+    | or:                                                                 |
+    |     ./start bootstrap prepareOS brew brewCTF osx anaconda           |
+    +---------------------------------------------------------------------+
+    | or:                                                                 |
+    |     ./start bootstrap prepareOS brew brewCTF osx pydata             |
+    +---------------------------------------------------------------------+
+    | or:                                                                 |
+    |    ./start bootstrap prepareOS brew brewCTF osx anaconda datastores |
+    +---------------------------------------------------------------------+
+    | or:                                                                 |
+    |    ./start bootstrap prepareOS brew brewCTF osx pydata datastores   |
+    +---------------------------------------------------------------------+
 
 
+**Scripts tested on OS X 10.12 Sierra.**
 
-### Step 1.0 - Run osX system updates:
+* [Single Setup Script](#single-setup-script)
+* [bootstrap/bootstrap.sh script](#bootstrapsh-script)
+    * Syncs dev-setup to your local home directory `~`
+* [osx/prepareOS.sh script](#osxprepsh-script)
+    * Updates OS X and installs Xcode command line tools
+* [homebrew/brew.sh script](#brewsh-script)
+    * Installs common Homebrew formulae and apps
+* [homebrew/brew-CTF.sh script](#brewsh-CTF-script)
+    * Installs Capture the Flag (CTF) is a special kind of information security competitions.
+* [osx/osx.sh script](#osxsh-script)
+    * Sets up OS X defaults geared towards developers
+* [python/pyAnaconda.sh script](#anaconda-script)
+    * Sets up python using Anaconda distribution
+    * Setup py36 virtual enviroment. 
+    * Setup py27 virtual enviroment.
+* [pydata.sh script](#pydatash-script)
+    * Sets up python for data analysis
+    * Setup py36 virtual enviroment. 
+    * Setup py27 virtual enviroment.
+* [datastores.sh script](#datastoressh-script)
+    * Sets up common data stores
 
-    $ source osx/prepareOS.sh
-
-### Step 1.1 - Run Configuration:
-
-    $ source bootstrap/bootstrap.sh
-
-### Step 1.2 - Run Homebrew:
-
-    $ source homebrew/brew.sh
-    $ source homebrew/brew-CTF.sh
-
-### Step 1.3 - Run osx to configure your desktop for development:
-
-    $ source osx/osx.sh
 
 ### Tools, IDEs, and Other Software Installed at the ned of this process.
 * git
@@ -93,30 +141,10 @@ Run all:
 * imagemagick --with-webp
 
 
-## Python: - Warning still under works
-There are many ways to seup python on the computer.
-Our focus on 3 methods:
-
-* Anaconda distribution - local instellations
-* Anaconda distribution - 
-* Setup Python without relying on anconda
-
-A personal prefered method **Ananconda - local instellations**:
-
-    $ source python/pyA.sh
-
-Anaconda using brew will install:
-
-    $ anaconda installs files under "/usr/local"
 
 Read more on conda vs. pip vs. virtualenv:
 * https://conda.io/docs/_downloads/conda-pip-virtualenv-translator.html
 
-
-
-## Run ALL:
-    $ cd ~; mkdir projects; cd projects; git clone https://github.com/limitlessv/osx-dev-setup.git
-    $ cd ~/projects/osx-dev-setup/; source prepareOS.sh; source bootstrap/bootstrap.sh; source homebrew/brew.sh;  source homebrew/brew-CTF.sh; source osx/osx.sh; source python/pydata.sh; source databases/dbTools.sh;
 
 
 ## Insperation:
