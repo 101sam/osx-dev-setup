@@ -106,6 +106,8 @@ The [bootstrap.sh script](#bootstrapsh-script) contains Vim customizations.
   <br/>
 </p>
 
+![Single Setup Script](#single-setup-script)
+
 The `bootstrap/bootstrap.sh` script will sync the dev-setup repo to your local home directory.  This will include customizations for Vim, bash, curl, git, tab completion, aliases, a number of utility functions, etc.  Section 2 of this repo describes some of the customizations.
 
 Run the `bootstrap/bootstrap.sh` script:
