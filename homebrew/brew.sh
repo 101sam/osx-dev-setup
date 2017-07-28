@@ -163,8 +163,7 @@ brew install boost-python --with-python3
 
 # ###############################################################################################
 # Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@
-# duti -x md
-$
+# duti -x m
 # ###############################################################################################
 brew install duti
 
