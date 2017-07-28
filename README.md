@@ -97,6 +97,39 @@ Some of the steps require manual changes read the instructions.
     * Sets up common data stores
 
 
+The [bootstrap.sh script](#bootstrapsh-script) contains Vim customizations.
+
+###bootstrap.sh script
+
+<p align="center">
+  <img src="http://www.limitlessv.com/wp-content/uploads/2017/07/commands.png">
+  <br/>
+</p>
+
+The `bootstrap/bootstrap.sh` script will sync the dev-setup repo to your local home directory.  This will include customizations for Vim, bash, curl, git, tab completion, aliases, a number of utility functions, etc.  Section 2 of this repo describes some of the customizations.
+
+Run the `bootstrap/bootstrap.sh` script:
+
+    $ source bootstrap/bootstrap.sh
+
+
+### prepareOS.sh script
+
+<p align="center">
+  <img src="http://www.limitlessv.com/wp-content/uploads/2017/07/xcode.jpg">
+  <br/>
+</p>
+
+Run the `osx/prepareOS.sh ` script:
+
+    $ source osx/osxprep.sh
+
+`osxprep.sh` will first install all updates.  If a restart is required, simply run the script again.  Once all updates are installed, `osxprep.sh` will then [Install Xcode Command Line Tools](#install-xcode-command-line-tools).
+
+If you want to go the manual route, you can also install all updates by running "App Store", selecting the "Updates" icon, then updating both the OS and installed apps.
+
+
+
 ### Tools, IDEs, and Other Software Installed at the ned of this process.
 * git
 * git-lfs
