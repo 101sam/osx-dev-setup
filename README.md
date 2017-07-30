@@ -106,8 +106,6 @@ The [bootstrap.sh script](#bootstrapsh-script) contains Vim customizations.
   <br/>
 </p>
 
-![Single Setup Script](#single-setup-script)
-
 The `bootstrap/bootstrap.sh` script will sync the dev-setup repo to your local home directory.  This will include customizations for Vim, bash, curl, git, tab completion, aliases, a number of utility functions, etc.  Section 2 of this repo describes some of the customizations.
 
 Run the `bootstrap/bootstrap.sh` script:
@@ -181,6 +179,38 @@ Read more on conda vs. pip vs. virtualenv:
 * https://conda.io/docs/_downloads/conda-pip-virtualenv-translator.html
 
 
+## Todo:
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Add homebrew setup</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Add setup for python development</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Add setup for python development using anaconda</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Fix setup for databases</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Add support for more development env:</li>
+<ul class="contains-sub-task-list1">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Add support for Java development</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Add support for PHP development</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Add support for Ruby development</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Add support for Java development</li>
+</ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox">  Add support for cloud services:</li>
+<ul class="contains-sub-task-list2">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox">  Google</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox">  AWS</li>
+</ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox">  Add better documents and instructions for:</li>
+<ul class="contains-sub-task-list3">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Python packages</li>
+<ul class="contains-sub-sub-task-list4">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Libraries</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> OpenCV & Face recognition.</li>
+</ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> macOS</li>
+<ul class="contains-sub-sub-task-list4">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Cheat Sheet - function and aliases</li>
+</ul>
+</ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> TBD</li>
+</ul>
 
 ## Insperation:
 

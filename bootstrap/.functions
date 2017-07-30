@@ -244,3 +244,24 @@ function o() {
 function tre() {
     tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+
+# Comment / Uncomment out bash script
+
+comment_script() {
+    if [ $# -eq 0 ]; then
+		echo "usage: comment_script [start-string] [end-string] [input-file]"
+	else
+	    sed '/'$1'/,/'$2'/s/^/#/' $3 ;
+	fi;
+}
+
+uncomment_script() {
+	if [ $# -eq 0 ]; then
+		echo "usage: uncomment_script [start-string] [end-string] [input-file]"
+	else
+		sed '/'$1'/,/'$2'/s/^##*//' $3 ;
+	fi;
+
+}
+
