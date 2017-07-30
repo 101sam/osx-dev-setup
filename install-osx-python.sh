@@ -37,6 +37,7 @@ download_repository() {
 	if [ -d ${LIMITLESS_HOME} ]; then
 	    # Saving current setting
 		mv ${LIMITLESS_HOME} ${LIMITLESS_HOME.old}
+		mkdir -p ${LIMITLESS_HOME}
 		echo " "
 		echo "Renamed directory ${LIMITLESS_HOME} to ${LIMITLESS_HOME_OLD}"
 		echo "You may want to check and delete this directory if not required."
@@ -46,7 +47,7 @@ download_repository() {
 	else
 	    # Saving current setting
 		echo "Old .dotfiles will be saved to ${LIMITLESS_HOME_OLD}"
-	    mkdir ${LIMITLESS_HOME.old}
+	    mkdir -p ${LIMITLESS_HOME.old}
 	fi
 
 	echo " "
@@ -70,7 +71,7 @@ make_backup_files() {
 	    echo "Backup will be store in: "$(LIMITLESS_BACKUP)
 	else
 	    echo 'Create Backup directory: '$LIMITLESS_BACKUP
-	    mkdir -p  $LIMITLESS_BACKUP
+	    mkdir -p ${$LIMITLESS_BACKUP}
 	fi
 
 
@@ -140,6 +141,7 @@ echo "END: Download repository"
 
 echo "BEGIN: backup"
 make_backup_files
+echo $LIMITLESS_HOME
 cd $LIMITLESS_HOME
 echo "END: backup"
 
