@@ -30,7 +30,16 @@ Some of the steps require manual changes read the instructions.
 ##### Clone the Repo
 
 	$ cd ~; mkdir projects; cd projects
-	$ git clone https://github.com/limitlessv/osx-dev-setup.git;cd projects; ./start all
+	$ git clone https://github.com/limitlessv/osx-dev-setup.git;cd ~/projects/osx-dev-setup/; ./start all
+
+
+Download:
+    # Download the bash script
+    $ curl -O https://raw.githubusercontent.com/limitlessv/osx-dev-setup/master/install-osx-python.sh
+    # Make the script executable
+    $ chmod 744 install-mxnet-osx-python.sh
+    #  Run the script.
+    $ bash install-mxnet-osx-python.sh
 
 ##### Run the ./start Script with Command Line Arguments
 
