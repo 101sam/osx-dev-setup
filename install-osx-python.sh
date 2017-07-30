@@ -15,6 +15,7 @@ then
 	export LIMITLESS_HOME="$HOME/.LimitlessV"
 fi
 
+
 export TARIKH=`/bin/date +%Y%m%d%H%M%S`
 export LIMITLESS_HOME_OLD="$HOME/.LimitlessV.${TARIKH}"
 export LIMITLESS_BACKUP="$HOME/.LimitlessV.${TARIKH}/backup"
@@ -71,7 +72,7 @@ make_backup_files() {
 	    echo "Backup will be store in: "$(LIMITLESS_BACKUP)
 	else
 	    echo 'Create Backup directory: '$LIMITLESS_BACKUP
-	    mkdir -p ${$LIMITLESS_BACKUP}
+	    mkdir -p ${LIMITLESS_BACKUP}
 	fi
 
 
@@ -142,6 +143,9 @@ echo "END: Download repository"
 echo "BEGIN: backup"
 make_backup_files
 echo $LIMITLESS_HOME
+if [ ! -d ${LIMITLESS_BACKUP} ]; then
+    mkdir -p ${LIMITLESS_HOME}
+fi
 cd $LIMITLESS_HOME
 echo "END: backup"
 
