@@ -38,6 +38,13 @@ brew install cmake pkg-config
 brew install jpeg libpng libtiff openexr
 brew install eigen tbb
 brew install gtk+3 boost
+brew install graphviz
+
+brew tap homebrew/science
+brew install openblas
+brew install opencv
+
+
 
 echo "Step 03:"
 
@@ -111,10 +118,11 @@ pip install tensorflow
 pip install polyglot
 pip install tqdm
 pip install nltk
-pip install mxnet
+
 pip install theano
 pip install keras
 pip install lightgbm
+pip install opencv-python
 ###############################################################################
 echo "Step 15:"
 conda clean -y --all

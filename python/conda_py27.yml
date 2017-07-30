@@ -61,7 +61,6 @@ dependencies:
     - packaging
     - tqdm
     - nltk
-    - mxnet
     - statsmodels
     - tensorflow
     - theano
