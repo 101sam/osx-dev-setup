@@ -136,10 +136,6 @@ sudo softwareupdate --install -a --verbose
 echo "END: If this requires a restart, run the script again."
 
 
-echo "BEGIN: Download repository"
-download_repository
-echo "END: Download repository"
-
 echo "BEGIN: backup"
 make_backup_files
 echo $LIMITLESS_HOME
@@ -148,6 +144,10 @@ if [ ! -d ${LIMITLESS_BACKUP} ]; then
 fi
 cd $LIMITLESS_HOME
 echo "END: backup"
+
+echo "BEGIN: Download repository"
+download_repository
+echo "END: Download repository"
 
 echo "BEGIN: sync"
 cd bootstrap
