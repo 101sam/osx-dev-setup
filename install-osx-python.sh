@@ -139,7 +139,7 @@ echo "END: If this requires a restart, run the script again."
 echo "BEGIN: backup"
 make_backup_files
 echo $LIMITLESS_HOME
-if [ ! -d ${LIMITLESS_BACKUP} ]; then
+if [ ! -d ${LIMITLESS_HOME} ]; then
     mkdir -p ${LIMITLESS_HOME}
 fi
 cd $LIMITLESS_HOME
