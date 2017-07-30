@@ -37,7 +37,7 @@ runme() {
 download_repository() {
 	if [ -d ${LIMITLESS_HOME} ]; then
 	    # Saving current setting
-		mv ${LIMITLESS_HOME} ${LIMITLESS_HOME.old}
+		mv ${LIMITLESS_HOME} ${LIMITLESS_HOME_OLD}
 		mkdir -p ${LIMITLESS_HOME}
 		echo " "
 		echo "Renamed directory ${LIMITLESS_HOME} to ${LIMITLESS_HOME_OLD}"
@@ -48,7 +48,7 @@ download_repository() {
 	else
 	    # Saving current setting
 		echo "Old .dotfiles will be saved to ${LIMITLESS_HOME_OLD}"
-	    mkdir -p ${LIMITLESS_HOME.old}
+	    mkdir -p ${LIMITLESS_HOME_OLD}
 	fi
 
 	echo " "
@@ -139,7 +139,7 @@ echo "END: If this requires a restart, run the script again."
 echo "BEGIN: backup"
 make_backup_files
 echo $LIMITLESS_HOME
-if [ ! -d ${LIMITLESS_HOME} ]; then
+if [ ! -d "$LIMITLESS_HOME" ]; then
     mkdir -p ${LIMITLESS_HOME}
 fi
 cd $LIMITLESS_HOME
