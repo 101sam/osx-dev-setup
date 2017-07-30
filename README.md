@@ -225,10 +225,18 @@ and many others projects such as:
 * https://gist.github.com/t-io/8255711
 * https://github.com/svett/mac-osx-dev-setup
 * https://github.com/StriveForBest/osx-dev-environment-setup
+* https://github.com/donnemartin/data-science-ipython-notebooks
 
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+This repository contains a variety of content; some developed by Shmuel Maruani, and some from third-parties.
+The third-party content is distributed under the license provided by those parties.
+
+The content developed by Shmuel Maruani is distributed under MIT License - see the [LICENSE](LICENSE) file for details.
+
+
 
 ## Release History
 see the [CHANGES](CHANGES.md).

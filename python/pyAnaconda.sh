@@ -118,7 +118,6 @@ pip install tensorflow
 pip install polyglot
 pip install tqdm
 pip install nltk
-
 pip install theano
 pip install keras
 pip install lightgbm
