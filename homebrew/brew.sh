@@ -160,6 +160,8 @@ brew install pandoc
 brew install gcc --without-multilib
 brew install cmake
 brew install boost-python --with-python3
+# https://github.com/mas-cli/mas
+brew install mas
 
 # ###############################################################################################
 # Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@

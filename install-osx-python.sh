@@ -163,6 +163,16 @@ fi;
 cd ..
 echo "END: sync"
 
+echo "BEGIN: brew"
+source homebrew/brew.sh
+echo "END: brew"
+
+
+
+echo "BEGIN: brew-CTF"
+source homebrew/brew-CTF.sh
+echo "END: brew-CTF"
+
 
 unset runme;
 unset download_repository;
