@@ -81,7 +81,7 @@ make_backup_files() {
 
         if [ -d $HOME/$i ]; then
             echo 'Backup: ['$HOME/$i'] to '$LIMITLESS_BACKUP/$i ;
-            cp -rf $HOME/$i $LIMITLESS_BACKUP/$i;
+            cp -frpv $HOME/$i $LIMITLESS_BACKUP/$i;
         else
             echo $HOME/$i' Ignored';
         fi;
@@ -91,7 +91,7 @@ make_backup_files() {
     do
         if [ -f $HOME/$i ]; then
             echo 'Backup: ['$HOME/$i'] to '$LIMITLESS_BACKUP/$i ;
-            cp -f $HOME/$i $LIMITLESS_BACKUP/$i;
+            cp -fpv $HOME/$i $LIMITLESS_BACKUP/$i;
         else
             echo $HOME/$i' Ignored';
         fi;
