@@ -44,3 +44,7 @@ grep -q "$LINE" ~/.extra || echo "$LINE" >> ~/.extra
 
 #brew install homebrew/php/php55 --with-gmp
 #brew install homebrew/homebrew-php --with-gmp
+
+
+brew install heroku-toolbelt
+heroku update

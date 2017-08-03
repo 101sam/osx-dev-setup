@@ -104,6 +104,7 @@ brew install python3
 # ###############################################################################################
 # Install ruby-build and rbenv
 # ###############################################################################################
+brew install ruby
 brew install ruby-build
 brew install rbenv
 LINE='eval "$(rbenv init -)"'
@@ -119,6 +120,10 @@ brew install homebrew/dupes/grep
 brew install homebrew/dupes/openssh
 brew install homebrew/dupes/screen
 
+# If php already installed
+#brew unlink php
+#brew unlink php55
+#brew unlink php56
 brew install homebrew/php/php55 --with-gmp
 
 # ###############################################################################################
@@ -169,6 +174,14 @@ brew install mas
 # ###############################################################################################
 brew install duti
 
+# ###############################################################################################
+# Install Extra
+# ###############################################################################################
+brew install sdl2
+brew install sdl2_image
+brew install sdl2_ttf
+brew install sdl2_mixer
+brew install gstreamer
 
 # ###############################################################################################
 # Lxml and Libxslt
@@ -177,6 +190,13 @@ brew install libxml2
 brew install libxslt
 brew link libxml2 --force
 brew link libxslt --force
+
+
+# ###############################################################################################
+# Install Heroku
+# ###############################################################################################
+brew install heroku-toolbelt
+heroku update
 
 # ###############################################################################################
 # Install Cask
@@ -193,8 +213,6 @@ brew cask install --appdir="/Applications" iterm2
 brew cask install --appdir="~/Applications" java
 brew cask install --appdir="~/Applications" xquartz
 brew cask install --appdir="/Applications" pycharm-ce
-
-
 
 # Development tool casks
 brew cask install --appdir="/Applications" virtualbox
@@ -243,11 +261,16 @@ brew cask install --appdir="/Applications" skype
 brew cask install --appdir="/Applications" slack
 brew cask install --appdir="/Applications" dropbox
 brew cask install --appdir="/Applications" evernote
-brew cask install --appdir="/Applications" 1password
 brew cask install --appdir="/Applications" gimp
 brew cask install --appdir="/Applications" paintbrush
 brew cask install --appdir="/Applications" vlc
 brew cask install --appdir="/Applications" github-desktop
+
+# passwords Manages
+# https://1password.com/
+# brew cask install --appdir="/Applications" 1password
+brew cask install --appdir="/Applications" dashlane
+
 
 #brew cask install --appdir="/Applications" inkscape
 
