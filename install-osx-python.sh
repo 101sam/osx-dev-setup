@@ -65,7 +65,7 @@ download_repository() {
 
 make_backup_files() {
 
-    bk_dir_list=(.vim init anaconda1 anaconda3 .pip)
+    bk_dir_list=(.vim init anaconda1 anaconda3 .pip .ipython)
     bk_file_list=(.aliases .bash_profile .bash_prompt .bashrc .curlrc .editorconfig .exports .extra .functions .gitconfig .gitignore .gvimrc .hushlogin .inputrc .path .screenrc .vimrc .wgetrc)
 
 	if [ -d ${LIMITLESS_BACKUP} ]; then

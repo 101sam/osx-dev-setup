@@ -24,9 +24,6 @@ echo "Step 01:"
 # Update anaconda root enviroment to the latest
 conda update -y --all
 
-# Clean old packages and free memory
-conda clean -y --all
-
 echo "Step 02:"
 
 # Install importent packages
@@ -38,11 +35,48 @@ brew install cmake pkg-config
 brew install jpeg libpng libtiff openexr
 brew install eigen tbb
 brew install gtk+3 boost
-brew install graphviz
+
+# Fixing homebrew secuirty
+sudo chown -Rv `whoami`:admin /usr/local/bin
+sudo chown -Rv `whoami`:admin /usr/local/share
+sudo chown -R $(whoami) /usr/local/lib/pkgconfig
+
+/usr/local/lib/
+#
+# https://stackoverflow.com/questions/17727619/tclstub-issue-while-using-homebrew-to-install-graphviz
+brew -v install tcl-tk --with-tk
+
+# In case of having problems:
+# brew uninstall graphviz
+# brew prune
+# rm '/usr/local/share/man/man1/acyclic.1'
+# rm '/usr/local/share/man/man1/bcomps.1'
+# rm '/usr/local/share/man/man1/ccomps.1'
+# rm '/usr/local/share/man/man1/circo.1'
+# rm '/usr/local/share/man/man1/cluster.1'
+# rm '/usr/local/share/man/man1/diffimg.1'
+# rm '/usr/local/share/man/man1/dijkstra.1'
+# rm '/usr/local/share/man/man1/dot.1'
+# rm '/usr/local/share/man/man1/dotty.1'
+# rm '/usr/local/share/man/man1/edgepaint.1'
+#
+# sudo rm -rf /usr/local/share/graphviz
+
+brew -v reinstall graphviz
+brew link --overwrite graphviz
+
+
+
+
+
+#brew install graphviz
+# sudo port install graphviz-gui
+
 
 brew tap homebrew/science
 brew install openblas
 brew install opencv
+brew link --overwrite opencv
 
 
 
@@ -81,7 +115,6 @@ pip install polyglot
 
 # Clean up
 rm -Rf xgboost
-conda clean -y --all
 
 echo "Step 10:"
 ###############################################################################
@@ -106,11 +139,15 @@ pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp36-cp36m-macosx
 pip install torchvision
 
 echo "Step 13:"
-# git clone --recursive https://github.com/dmlc/xgboost
+git clone --recursive https://github.com/dmlc/xgboost
 cd xgboost; cp make/minimum.mk ./config.mk; make -j4
 
 cd python-package; python setup.py install
 cd ../..
+
+# Clean up
+rm -Rf xgboost
+
 
 echo "Step 14:"
 # Re insurance due the depandacy orders some of those package my need to re-install
@@ -122,9 +159,6 @@ pip install theano
 pip install keras
 pip install lightgbm
 pip install opencv-python
-###############################################################################
-echo "Step 15:"
-conda clean -y --all
 
 ###############################################################################
 # Install IPython Profile
@@ -134,15 +168,17 @@ echo "Installing IPython Notebook Default Profile"
 
 # Add the IPython profile
 mkdir -p ~/.ipython
-cp -r ../init/profile_default/ ~/.ipython/profile_default
+cp -r ../bootstrap/init/profile_default/ ~/.ipython/profile_default
 
-echo "Step 16:"
+echo "Step 15:"
 
 source deactivate
-conda clean -y --all
+
+rm -f Anaconda3-4.4.0-MacOSX-x86_64.sh -b
+
 cd ..
 
-echo "Step 17:"
+echo "Step 16:"
 echo "#"
 echo "# To activate python 2.7 environment, use:"
 echo "# > source activate py27"

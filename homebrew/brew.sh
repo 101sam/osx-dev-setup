@@ -186,10 +186,10 @@ brew install gstreamer
 # ###############################################################################################
 # Lxml and Libxslt
 # ###############################################################################################
-brew install libxml2
-brew install libxslt
-brew link libxml2 --force
-brew link libxslt --force
+#brew install libxml2
+#brew install libxslt
+#brew link libxml2 --force
+#brew link libxslt --force
 
 
 # ###############################################################################################
