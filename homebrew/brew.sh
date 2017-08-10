@@ -167,7 +167,10 @@ brew install cmake
 brew install boost-python --with-python3
 # https://github.com/mas-cli/mas
 brew install mas
-
+# Install FFMPEG to convert Mp4 to WebM eample: ffmpeg -i video.mp4 -strict -2 video.webm
+brew install libvpx
+brew install ffmpeg --with-libvpx
+ 
 # ###############################################################################################
 # Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@
 # duti -x m
