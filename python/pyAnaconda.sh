@@ -28,6 +28,13 @@ echo "Step 02:"
 
 # Install importent packages
 conda install -y future
+conda install -y virtualenv
+conda install -y coverage
+conda install -y flake8
+pip install tox
+pip install watchdog
+pip install bumpversion
+
 
 brew install ta-lib
 brew install icu4c

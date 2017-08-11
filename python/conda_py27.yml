@@ -46,6 +46,9 @@ dependencies:
 - defaults::uuid
 - defaults::Basemap
 - defaults::NetworkX
+- defaults::virtualenv
+- defaults::coverage
+- defaults::flake8
 - pip:
     - cookiecutter
     - pip-review
@@ -74,3 +77,6 @@ dependencies:
     - hyperopt
     - kivy
     - prettytable
+    - tox
+    - watchdog
+    - bumpversion

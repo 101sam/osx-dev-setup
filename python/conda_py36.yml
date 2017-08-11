@@ -45,6 +45,9 @@ dependencies:
 - defaults::progressbar2
 - defaults::Basemap
 - defaults::NetworkX
+- defaults::virtualenv
+- defaults::coverage
+- defaults::flake8
 - pip:
     - cookiecutter
     - pip-review
@@ -73,3 +76,6 @@ dependencies:
     - hyperopt
     - kivy
     - prettytable
+    - tox
+    - watchdog
+    - bumpversion
