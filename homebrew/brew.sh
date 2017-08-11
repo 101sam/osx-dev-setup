@@ -170,6 +170,11 @@ brew install mas
 # Install FFMPEG to convert Mp4 to WebM eample: ffmpeg -i video.mp4 -strict -2 video.webm
 brew install libvpx
 brew install ffmpeg --with-libvpx
+
+# jq is like sed for JSON data
+# https://stedolan.github.io/jq/
+brew install jq
+
  
 # ###############################################################################################
 # Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@

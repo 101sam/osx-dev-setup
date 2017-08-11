@@ -164,14 +164,10 @@ cd ..
 echo "END: sync"
 
 echo "BEGIN: brew"
+source homebrew/brew-group-permissions.sh
 source homebrew/brew.sh
-echo "END: brew"
-
-
-
-echo "BEGIN: brew-CTF"
 source homebrew/brew-CTF.sh
-echo "END: brew-CTF"
+echo "END: brew"
 
 
 unset runme;

@@ -20,9 +20,8 @@ function runBrewPermissionsFix() {
     echo "Allow admins to manager cask install"
     chgrp -R admin /opt/homebrew-cask
     chmod -R g+w /opt/homebrew-cask
-
-
 }
+
 echo ""
 echo -e "Warrning !!!"
 echo -e "This script modify homebrew directory permissions."

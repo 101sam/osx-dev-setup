@@ -41,6 +41,8 @@ function runDots() {
             echo "This might awhile to complete, as some formulae need to be installed from source."
             echo "------------------------------"
             echo ""
+            source homebrew/brew-group-permissions.sh
+            #
             source homebrew/brew.sh
         fi
         if [ $ARG == "brewCTF" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
