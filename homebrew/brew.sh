@@ -190,7 +190,8 @@ brew install pinentry
 brew install adns
 brew install libusb
 brew install gpg
- 
+brew install htop
+
 # ###############################################################################################
 # Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@
 # duti -x m
