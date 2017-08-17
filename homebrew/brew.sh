@@ -175,6 +175,21 @@ brew install ffmpeg --with-libvpx
 # https://stedolan.github.io/jq/
 brew install jq
 
+# Installing gpg/gnupg and dependencies
+brew install npth
+brew install libtasn1
+brew install nettle
+brew install libunistring
+brew install p11-kit
+brew install gnutls
+brew install libgpg-error
+brew install libgcrypt
+brew install libksba
+brew install libassuan
+brew install pinentry
+brew install adns
+brew install libusb
+brew install gpg
  
 # ###############################################################################################
 # Ref: https://www.chainsawonatireswing.com/2012/09/19/changing-default-applications-on-a-mac-using-the-command-line-then-a-shell-script/?from=@
