@@ -8,7 +8,7 @@ function doIt() {
     rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
         --exclude "README.md" --exclude "LICENSE" --exclude ".idea/" -avh --no-perms . ~;
     source ~/.bash_profile;
-	chmod +x ~/.wifi/sniff.sh
+    chmod +x ~/.wifi/sniff.sh
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
