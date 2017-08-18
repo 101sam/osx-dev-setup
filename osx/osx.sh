@@ -8,6 +8,8 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `osx.sh` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
+
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
