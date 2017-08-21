@@ -309,6 +309,8 @@ brew install boot2docker
 # Install developer friendly quick look plugins; see https://github.com/sindresorhus/quick-look-plugins
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
 
+# USB Images to create USB boot images from iso
+brew cask install --appdir="~/Applications" UNetbootin
 # Remove outdated versions from the cellar.
 brew cleanup
 
