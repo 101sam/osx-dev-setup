@@ -48,6 +48,7 @@ dependencies:
 - defaults::virtualenv
 - defaults::coverage
 - defaults::flake8
+- defaults::pyyaml
 - pip:
     - cookiecutter
     - pip-review
@@ -79,3 +80,7 @@ dependencies:
     - tox
     - watchdog
     - bumpversion
+    - pandas_datareader
+    - imbalanced-learn
+    - category_encoders
+    - pyfolio
