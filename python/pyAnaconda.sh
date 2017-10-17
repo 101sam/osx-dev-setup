@@ -7,10 +7,13 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-wget https://repo.continuum.io/archive/Anaconda3-4.4.0-MacOSX-x86_64.sh
+#wget https://repo.continuum.io/archive/Anaconda3-4.4.0-MacOSX-x86_64.sh
+wget https://repo.continuum.io/archive/Anaconda3-5.0.0-MacOSX-x86_64.sh
 
 # Install in batch mode
-bash Anaconda3-4.4.0-MacOSX-x86_64.sh -b
+#bash Anaconda3-4.4.0-MacOSX-x86_64.sh -b
+bash Anaconda3-5.0.0-MacOSX-x86_64.sh -b
+
 
 # Install in a batch mode required to add path
 export PATH="~/anaconda3/bin:$PATH"
