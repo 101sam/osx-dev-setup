@@ -116,7 +116,7 @@ grep -q "$LINE" ~/.extra || echo "$LINE" >> ~/.extra
 # ###############################################################################################
 
 #brew install vim --override-system-vi
-# Need to this: 
+# Need to this:
 # https://github.com/Homebrew/homebrew-core/issues/14774
 brew install --without-python --with-override-system-vi vim
 
@@ -210,6 +210,7 @@ brew install sdl2_image
 brew install sdl2_ttf
 brew install sdl2_mixer
 brew install gstreamer
+brew install tmux
 
 # ###############################################################################################
 # Lxml and Libxslt
