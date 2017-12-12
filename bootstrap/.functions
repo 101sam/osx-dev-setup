@@ -265,3 +265,13 @@ uncomment_script() {
 
 }
 
+py-upd() {
+# anconda update all env
+  source activate py36
+  conda update --all $1
+  source activate py27
+  conda update --all $1
+  source activate
+  conda update --all $1
+  conda clean --all $1
+}
