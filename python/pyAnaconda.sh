@@ -8,7 +8,8 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 #wget https://repo.continuum.io/archive/Anaconda3-4.4.0-MacOSX-x86_64.sh
-wget https://repo.continuum.io/archive/Anaconda3-5.0.0-MacOSX-x86_64.sh
+#wget https://repo.continuum.io/archive/Anaconda3-5.0.0-MacOSX-x86_64.sh
+wget https://repo.continuum.io/archive/Anaconda3-5.0.1-MacOSX-x86_64.sh
 
 # Install in batch mode
 #bash Anaconda3-4.4.0-MacOSX-x86_64.sh -b
