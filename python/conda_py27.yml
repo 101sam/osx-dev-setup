@@ -52,6 +52,7 @@ dependencies:
 - defaults::flake8
 - defaults::pyyaml
 - defaults::plotly
+- defaults::spyder
 - pip:
     - cookiecutter
     - pip-review
