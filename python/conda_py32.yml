@@ -48,6 +48,7 @@ dependencies:
 - defaults::virtualenv
 - defaults::coverage
 - defaults::flake8
+- defaults::spyder
 - pip:
     - cookiecutter
     - pip-review
