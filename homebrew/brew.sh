@@ -220,6 +220,28 @@ brew install tmux
 #brew link libxml2 --force
 #brew link libxslt --force
 
+# ###############################################################################################
+# Install tools.
+# ###############################################################################################
+
+# links and lynx are command line web browsers, allowing you full web access
+brew install links
+
+# The watch command is super useful to keep a continuous eye on another process.
+# For example you can use watch to track disk usage or IO, or virtual memory usage,
+# or anything else, updating the command output every few seconds.
+# Examples: 
+#  monitor disk size:
+#           watch -n 5  df -kh
+#  monitor file name readme.txt:
+#           watch -d 'ls -l | fgrep readme.txt'
+#  monitor date:
+#           watch -d date
+#  monitor files with Suppress watch header in the output name using -t:
+#           watch -t ls
+#  monitor process Id:
+#           watch "ps -ef | awk -F' ' '{print \$2 , \$8 }'"
+brew install watch
 
 # ###############################################################################################
 # Install Heroku
