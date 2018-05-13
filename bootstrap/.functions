@@ -265,13 +265,46 @@ uncomment_script() {
 
 }
 
-py-upd() {
+py-upd(){
 # anconda update all env
-  source activate py36
-  conda update --all $1
-  source activate py27
-  conda update --all $1
-  source activate
-  conda update --all $1
-  conda clean --all $1
+  echo "Activate to py36" ;
+  echo "~~~~~~~~~~~~~~~~" ;
+  source activate py36 ;
+
+  echo "Updates py36" ;
+  echo "~~~~~~~~~~~~" ;
+  conda update --all $1 ;
+
+  echo "Activate to py27" ;
+  echo "~~~~~~~~~~~~~~~~" ;
+  source activate py27 ;
+
+  echo "Updates py27" ;
+  echo "~~~~~~~~~~~~" ;
+  conda update --all $1 ;
+
+  echo "Activate root" ;
+  echo "~~~~~~~~~~~~~~~~" ;
+  source activate root;
+
+  echo "Updates root" ;
+  echo "~~~~~~~~~~~~" ;
+  conda update --all $1 ;
+
+  echo "Activate []" ;
+  echo "~~~~~~~~~~~~~~~~" ;
+  source activate ;
+
+  echo "Updates []" ;
+  echo "~~~~~~~~~~~~" ;
+  conda update --all $1 ;
+
+
+  echo "Clean All" ;
+  echo "~~~~~~~~~~~~" ;
+  conda clean --all $1 ;
+
+  echo "Deactivate anconda env" ;
+
+  source deactivate;
 }
