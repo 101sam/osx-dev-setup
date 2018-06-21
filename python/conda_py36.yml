@@ -52,6 +52,8 @@ dependencies:
 - defaults::pyyaml
 - defaults::plotly
 - defaults::spyder
+- defaults::python-dateutil
+- defaults::html5lib
 - pip:
     - cookiecutter
     - pip-review
@@ -88,3 +90,6 @@ dependencies:
     - category_encoders
     - pyfolio
     - django-allauth
+    - msgpack
+    - bleach
+    - chatterbot
