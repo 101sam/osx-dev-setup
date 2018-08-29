@@ -9,6 +9,7 @@ NODE_REPL_HISTORY_SIZE='32768';
 # Increase Bash history size. Allow 32³ entries; the default is 500.
 export HISTSIZE='32768';
 export HISTFILESIZE="${HISTSIZE}";
+
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth';
 
@@ -25,6 +26,8 @@ export MANPAGER='less -X';
 # Always enable colored `grep` output.
 export GREP_OPTIONS='--color=auto';
 
-
 # added to spyder qt errors
 export EVENT_NOKQUEUE=1
+
+# add HOMEBREW github API Token
+export HOMEBREW_GITHUB_API_TOKEN="bad562a12420be2a18a81415cfe3957b93b464ac"
