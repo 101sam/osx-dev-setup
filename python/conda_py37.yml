@@ -1,7 +1,7 @@
 name: py37
 channels:
 - soumith
-- menpo
+#- menpo
 - conda-forge
 - anaconda-fusion
 - defaults
@@ -31,7 +31,7 @@ dependencies:
 - conda-forge::flask-restful
 - defaults::sqlalchemy
 - defaults::future
-- menpo::dlib
+#- menpo::dlib
 - defaults::graphviz
 - defaults::pydotplus
 - defaults::beautifulsoup4

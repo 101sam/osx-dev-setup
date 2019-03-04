@@ -1,6 +1,6 @@
 [user]
-	name = Shmuel Maruani
-	email = 13782917++limitlessv@users.noreply.github.com
+	name = limitlessv
+	email = 13782917+limitlessv@users.noreply.github.com
 
 [alias]
 
@@ -99,6 +99,9 @@
     # Prevent showing files whose names contain non-ASCII symbols as unversioned.
     # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
     precomposeunicode = false
+	autocrlf = false
+	eol = LF
+	fileMode = false
 
 [color]
 
@@ -129,6 +132,7 @@
 
     # Detect copies as well as renames
     renames = copies
+	renamelimit = 5000
 
 [help]
 
