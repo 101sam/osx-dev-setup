@@ -10,11 +10,13 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 #wget https://repo.continuum.io/archive/Anaconda3-4.4.0-MacOSX-x86_64.sh
 #wget https://repo.continuum.io/archive/Anaconda3-5.0.0-MacOSX-x86_64.sh
 #wget https://repo.continuum.io/archive/Anaconda3-5.0.1-MacOSX-x86_64.sh
-wget https://repo.continuum.io/archive/Anaconda3-5.1.0-MacOSX-x86_64.sh
+#wget https://repo.continuum.io/archive/Anaconda3-5.1.0-MacOSX-x86_64.sh
+wget https://repo.anaconda.com/archive/Anaconda3-2018.12-MacOSX-x86_64.sh
 
 # Install in batch mode
 #bash Anaconda3-4.4.0-MacOSX-x86_64.sh -b
-Anaconda3-5.1.0-MacOSX-x86_64.sh -b
+chmod +x Anaconda3-2018.12-MacOSX-x86_64.sh
+Anaconda3-2018.12-MacOSX-x86_64.sh -b
 
 
 # Install in a batch mode required to add path
@@ -31,7 +33,7 @@ conda update -y --all
 
 echo "Step 02:"
 
-# Install importent packages
+# Verify & Install importent packages
 conda install -y future
 conda install -y virtualenv
 conda install -y coverage
@@ -137,18 +139,21 @@ echo "Step 10:"
 ###############################################################################
 
 echo "------------------------------"
-echo "Setting up py36 virtual environment."
-conda env create -f conda_py36.yml
+echo "Setting up py37 virtual environment."
+conda env create -f conda_py37.yml
 
 echo "Step 11:"
-#conda create --name py36 python=3.6
-source activate py36
+#conda create --name py37 python=3.7
+source activate py37
 
 echo "Step 12:"
-# For python 3.6
+# For python 3.7
 # http://pytorch.org/
-pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp36-cp36m-macosx_10_7_x86_64.whl
-pip install torchvision
+#pip install http://download.pytorch.org/whl/torch-0.1.12.post2-cp36-cp36m-macosx_10_7_x86_64.whl
+#pip install torchvision
+
+conda install pytorch torchvision -c pytorch
+
 
 echo "Step 13:"
 git clone --recursive https://github.com/dmlc/xgboost
@@ -186,7 +191,7 @@ echo "Step 15:"
 
 source deactivate
 
-rm -f Anaconda3-4.4.0-MacOSX-x86_64.sh -b
+rm -f Anaconda3-2018.12-MacOSX-x86_64.sh -b
 
 cd ..
 
@@ -195,8 +200,8 @@ echo "#"
 echo "# To activate python 2.7 environment, use:"
 echo "# > source activate py27"
 echo "#"
-echo "# To activate python 3.6 environment, use:"
-echo "# > source activate py36"
+echo "# To activate python 3.7 environment, use:"
+echo "# > source activate py37"
 echo "#"
 echo "# To deactivate an active environment, use:"
 echo "# > source deactivate"
