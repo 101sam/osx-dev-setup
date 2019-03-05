@@ -28,7 +28,9 @@ echo export PATH='~/anaconda3/bin:$PATH' >> ~/.path
 
 echo "Step 01:"
 
-# Update anaconda root enviroment to the latest
+# Update anaconda root enviroment to the latest and add enviroment for init
+
+conda init bash
 conda update -y --all
 
 echo "Step 02:"
@@ -195,15 +197,18 @@ rm -f Anaconda3-2018.12-MacOSX-x86_64.sh -b
 
 cd ..
 
+# Add conda init to bash
+conda init bash
+
 echo "Step 16:"
 echo "#"
 echo "# To activate python 2.7 environment, use:"
-echo "# > source activate py27"
+echo "# > conda activate py27"
 echo "#"
 echo "# To activate python 3.7 environment, use:"
-echo "# > source activate py37"
+echo "# > conda activate py37"
 echo "#"
 echo "# To deactivate an active environment, use:"
-echo "# > source deactivate"
+echo "# > conda deactivate"
 echo "#"
 

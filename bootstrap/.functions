@@ -265,46 +265,30 @@ uncomment_script() {
 
 }
 
-py-upd(){
 # anconda update all env
-  echo "Activate to py36" ;
-  echo "~~~~~~~~~~~~~~~~" ;
-  source activate py36 ;
+# py-upd --yes
+py-upd(){
 
-  echo "Updates py36" ;
-  echo "~~~~~~~~~~~~" ;
-  conda update --all $1 ;
+	# Store the current conda env
+    if [[ -z "${CONDA_DEFAULT_ENV}" ]]; then
+		# undefined
+		MY_SCRIPT_VARIABLE="conda deactivate"
+    else
+		MY_SCRIPT_VARIABLE="conda activate ${CONDA_DEFAULT_ENV}"
+    fi
 
-  echo "Activate to py27" ;
-  echo "~~~~~~~~~~~~~~~~" ;
-  source activate py27 ;
+	# loop update each conda env include based
+    for env in $(conda env list | cut -d" " -f1 | tail -n+3); do
+		echo $env ;
+		conda activate $env ;
+		conda update --all $1 ;
+    done
+    # Clean up all
+    echo "Clean All" ;
+    echo "~~~~~~~~~~~~" ;
+    conda clean --all $1 ;
 
-  echo "Updates py27" ;
-  echo "~~~~~~~~~~~~" ;
-  conda update --all $1 ;
+    # Return to the working conda env
+    eval "${MY_SCRIPT_VARIABLE}";
 
-  echo "Activate root" ;
-  echo "~~~~~~~~~~~~~~~~" ;
-  source activate root;
-
-  echo "Updates root" ;
-  echo "~~~~~~~~~~~~" ;
-  conda update --all $1 ;
-
-  echo "Activate []" ;
-  echo "~~~~~~~~~~~~~~~~" ;
-  source activate ;
-
-  echo "Updates []" ;
-  echo "~~~~~~~~~~~~" ;
-  conda update --all $1 ;
-
-
-  echo "Clean All" ;
-  echo "~~~~~~~~~~~~" ;
-  conda clean --all $1 ;
-
-  echo "Deactivate anconda env" ;
-
-  source deactivate;
 }
