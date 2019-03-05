@@ -14,6 +14,13 @@
 # Un-SET
 # git config --global --unset user.name
 # git config --global --unset user.email
+#
+# git config --get-all user.email
+# git config --replace-all user.email "13782917+limitlessv@users.noreply.github.com"
+# git config --replace-all user.name "limitlessv"
+# git config --global --replace-all user.email "13782917+limitlessv@users.noreply.github.com"
+# git config --global --replace-all user.name "limitlessv"
+
 #########################################################################################
 
 [user]
