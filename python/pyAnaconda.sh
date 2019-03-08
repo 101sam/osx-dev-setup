@@ -30,8 +30,12 @@ echo "Step 01:"
 
 # Update anaconda root enviroment to the latest and add enviroment for init
 
-conda init bash
 conda update -y --all
+
+# conda init bash works only after first time conda update
+
+conda init bash
+
 
 echo "Step 02:"
 
@@ -201,6 +205,7 @@ cd ..
 conda init bash
 
 echo "Step 16:"
+echo "# Restart the shell in order to activate Anaconda latest changes"
 echo "#"
 echo "# To activate python 2.7 environment, use:"
 echo "# > conda activate py27"
