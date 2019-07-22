@@ -16,8 +16,8 @@ wget https://repo.anaconda.com/archive/Anaconda3-2019.03-MacOSX-x86_64.sh
 
 # Install in batch mode
 #bash Anaconda3-4.4.0-MacOSX-x86_64.sh -b
-chmod +x Anaconda3-2018.12-MacOSX-x86_64.sh
-Anaconda3-2018.12-MacOSX-x86_64.sh -b
+chmod +x Anaconda3-2019.03-MacOSX-x86_64.sh
+Anaconda3-2019.03-MacOSX-x86_64.sh -b
 
 
 # Install in a batch mode required to add path
@@ -198,7 +198,7 @@ echo "Step 15:"
 
 source deactivate
 
-rm -f Anaconda3-2018.12-MacOSX-x86_64.sh -b
+rm -f Anaconda3-2019.03-MacOSX-x86_64.sh -b
 
 cd ..
 
