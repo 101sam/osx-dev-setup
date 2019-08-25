@@ -31,5 +31,7 @@ brew upgrade --all
 # ###############################################################################################
 # Install Heroku
 # ###############################################################################################
+brew tap heroku/brew && brew install heroku
 brew install heroku-toolbelt
 heroku update
+brew upgrade heroku
