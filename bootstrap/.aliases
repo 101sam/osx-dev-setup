@@ -150,9 +150,9 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 alias reload="exec $SHELL -l"
 
 # Hombrew Upgrade, Update, Clean
-aliase homebrew="brew upgrade; brew update; brew cleanup;"
+alias homebrew="brew upgrade; brew update; brew cleanup;"
 
 # locate.updatedb
-aliase updatedb="sudo /usr/libexec/locate.updatedb"
+alias updatedb="sudo /usr/libexec/locate.updatedb"
 
 
