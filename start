@@ -45,7 +45,7 @@ function runDots() {
             #
             source homebrew/brew.sh
         fi
-        if [ $ARG == "brewCTF" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
+        if [ $ARG == "bre wCTF" ] || [ $ARG == "all" ] || [ $ARG == "python" ]; then
             # Run the brew-CTF.sh Script
             # For a full listing of installed formulae and apps, refer to
             # the commented brew.sh source file directly and tweak it to
