@@ -81,8 +81,7 @@ echo "Installing webfonts"
 }
 
 echo "Installing useful libraries"
-{
-    brew install p7zip
+{brew install p7zip
 brew install pigz
 brew install speedtest_cli
 brew install ssh-copy-id
@@ -172,10 +171,11 @@ brew install --cask --appdir="${HOME}/Applications" vlc
 brew install --cask --appdir="${HOME}/Applications" github-desktop
 brew install --cask --appdir="${HOME}/Applications" notion
 brew install --cask --appdir="${HOME}/Applications" brackets
+
 # (if brackets is not in the path (not found) symlink it )
 sudo ln -s /Applications/Brackets.app/Contents/Resources/brackets.sh /usr/local/bin/Brackets
 
-brew install --cask --appdir="${HOME}/Applications" bluejeans
+# brew install --cask --appdir="${HOME}/Applications" bluejeans
 brew install --cask --appdir="${HOME}/Applications" docker
 brew install --cask --appdir="${HOME}/Applications" postman
 
@@ -185,4 +185,16 @@ brew tap homebrew/cask
 } || {
     echo "One or more brew formulas failed to install"
 }
+
+# postman newman
+ brew install newman
+
+# jq is a sed equivalent for json. usefull to pretify logs in the terminal https://stedolan.github.io/jq/
+ brew install jq
+
+# setup conda in terminal after installing in the applications folder
+ source /usr/local/anaconda3/bin/activate
+ conda init zsh
+ conda config --set auto_activate_base False
+ sudo chmod 775 .conda
 

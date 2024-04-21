@@ -3,7 +3,6 @@ curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 sdk install java 17.0.0-zulu
-sdk install java 16.0.2-zulu
 sdk install java 11.0.12-zulu
 sdk install java 8.0.302-zulu
 
@@ -40,4 +39,5 @@ sdk install java 13-zulu "$HOME/.sdkman/candidates/java/{get name of the file}/{
 
 
 echo "Creating development directory at ~/Documents/dev"
-mkdir -p ~/Documents/dev
+mkdir -p ~/Documents/dev/LandingPages
+mkdir -p ~/Documents/dev/Learning
