@@ -125,7 +125,7 @@ EOF
 }
 
 # -------------------------------------
-# 🔧 Misc QOL
+# Misc QOL
 # -------------------------------------
 alias path='echo -e "${PATH//:/\n}"'
 alias whichall='type -a'
