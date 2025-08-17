@@ -8,7 +8,7 @@
 unalias reload 2>/dev/null
 
 # ================================================================================
-# 🔍 findenv — Search recursively in .env and .env.* files
+# findenv — Search recursively in .env and .env.* files
 # ================================================================================
 findenv() {
   if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
@@ -51,7 +51,7 @@ findenv() {
 }
 
 # ================================================================================
-# 🔍 findin — Generic file search with pattern and exclusions
+# findin — Generic file search with pattern and exclusions
 # ================================================================================
 findin() {
   if [[ "$1" == "--help" || "$1" == "-h" || $# -lt 1 ]]; then
@@ -103,19 +103,19 @@ findin() {
 }
 
 # ================================================================================
-# 🔧 serve — Start a quick static server (great for Next.js .out/, docs, or dist)
+# serve — Start a quick static server (great for Next.js .out/, docs, or dist)
 # ================================================================================
 serve() {
   local PORT=${1:-5000}
-  echo "🌐 Serving current directory at http://localhost:$PORT"
+  echo "Serving current directory at http://localhost:$PORT"
   python3 -m http.server "$PORT"
 }
 
 # ================================================================================
-# 🧹 npmclean — Recursively remove node_modules and lock files (use with care!)
+# npmclean — Recursively remove node_modules and lock files (use with care!)
 # ================================================================================
 npmclean() {
-  echo "🧹 Cleaning node_modules and lock files..."
+  echo "Cleaning node_modules and lock files..."
   find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
   find . \( -name "package-lock.json" -o -name "yarn.lock" -o -name "pnpm-lock.yaml" \) -exec rm -f {} +
 }
@@ -132,7 +132,7 @@ reload() {
 # 🔎 ports — List all open ports with listening processes
 # ================================================================================
 ports() {
-  echo "🔌 Listening ports:"
+  echo "Listening ports:"
   lsof -i -P -n | grep LISTEN
 }
 
@@ -160,7 +160,7 @@ jsonpp() {
 }
 
 # ================================================================================
-# 🧠 gitwho — See who edited a file the most (git blame summary)
+# gitwho — See who edited a file the most (git blame summary)
 # ================================================================================
 gitwho() {
   if [[ -z "$1" ]]; then
@@ -171,10 +171,10 @@ gitwho() {
 }
 
 # ================================================================================
-# ⏱️ now — Show current UTC timestamp in various formats
+# now — Show current UTC timestamp in various formats
 # ================================================================================
 now() {
-  echo "🕒 UTC Now: $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+  echo "UTC Now: $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
   echo "Date Only: $(date -u '+%Y-%m-%d')"
   echo "Unix Time: $(date -u '+%s')"
 }
@@ -313,7 +313,7 @@ cf-create() {
   # Usage: cf-create <PORT>
   if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]]; then
     cat <<EOF
-📦 Create Cloudflare Tunnel
+Create Cloudflare Tunnel
 
 Usage:
   cf-create <PORT>
@@ -340,9 +340,9 @@ EOF
 
   # Create tunnel if not exists
   if cloudflared tunnel list 2>/dev/null | awk 'NR>1{print $1}' | grep -qx "$TUNNEL_NAME"; then
-    echo "ℹ️  Tunnel '$TUNNEL_NAME' already exists. Skipping creation."
+    echo " Tunnel '$TUNNEL_NAME' already exists. Skipping creation."
   else
-    echo "🔧 Creating tunnel '$TUNNEL_NAME'…"
+    echo "Creating tunnel '$TUNNEL_NAME'…"
     cloudflared tunnel create "$TUNNEL_NAME" || {
       echo "❌ Failed creating tunnel '$TUNNEL_NAME'."
       return 1
@@ -351,10 +351,10 @@ EOF
 
   # Write config file (idempotent)
   _cf_write_cfg "$CFG" "$TUNNEL_NAME" "$HOSTNAME"
-  echo "📝 Wrote config: $CFG"
+  echo "Wrote config: $CFG"
 
   # Route DNS (creates/updates CNAME for HOSTNAME to the tunnel)
-  echo "🌐 Creating/Updating DNS route: $HOSTNAME → tunnel '$TUNNEL_NAME'"
+  echo "Creating/Updating DNS route: $HOSTNAME → tunnel '$TUNNEL_NAME'"
   cloudflared tunnel route dns "$TUNNEL_NAME" "$HOSTNAME" || {
     echo "⚠️  DNS route command failed. Ensure your Cloudflare account has access to $(_cf_domain)."
   }
@@ -368,7 +368,7 @@ cf-start() {
   # Usage: cf-start <PORT> [--log]
   if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]]; then
     cat <<'EOF'
-▶️  Start Cloudflare Tunnel
+ Start Cloudflare Tunnel
 
 Usage:
   cf-start <PORT> [--log]
@@ -394,14 +394,14 @@ EOF
     return 1
   fi
 
-  echo "🚀 Starting tunnel '$TUNNEL_NAME' with config: $CFG"
-  echo "🌐 URL: https://$HOSTNAME"
+  echo "Starting tunnel '$TUNNEL_NAME' with config: $CFG"
+  echo "URL: https://$HOSTNAME"
 
   local NOW
   NOW=$(date "+%Y-%m-%d %H:%M:%S")
 
   if $LOG_ENABLED; then
-    echo "🪵 Logging to: $LOG"
+    echo "Logging to: $LOG"
     echo "[$NOW] Starting tunnel: $TUNNEL_NAME" >> "$LOG"
     cloudflared tunnel --config "$CFG" run "$TUNNEL_NAME" | \
       while IFS= read -r line; do
@@ -425,7 +425,7 @@ cf-delete() {
   _cf_paths "$PORT"
   _cf_require_cloudflared || return 1
 
-  echo "🧨 Deleting tunnel '$TUNNEL_NAME'…"
+  echo "Deleting tunnel '$TUNNEL_NAME'…"
   if cloudflared tunnel delete -f "$TUNNEL_NAME"; then
     echo "✅ Tunnel deleted in Cloudflare."
   else
@@ -434,9 +434,9 @@ cf-delete() {
 
   # Remove local files
   local CREDS_JSON="$HOME/.cloudflared/${TUNNEL_NAME}.json"
-  [[ -f "$CFG" ]] && { rm -f "$CFG"; echo "🧹 Removed $CFG"; }
-  [[ -f "$LOG" ]] && { rm -f "$LOG"; echo "🧹 Removed $LOG"; }
-  [[ -f "$CREDS_JSON" ]] && { rm -f "$CREDS_JSON"; echo "🧹 Removed $CREDS_JSON (credentials)"; }
+  [[ -f "$CFG" ]] && { rm -f "$CFG"; echo "Removed $CFG"; }
+  [[ -f "$LOG" ]] && { rm -f "$LOG"; echo "Removed $LOG"; }
+  [[ -f "$CREDS_JSON" ]] && { rm -f "$CREDS_JSON"; echo "Removed $CREDS_JSON (credentials)"; }
 }
 
 cf-delete-all() {
@@ -462,7 +462,7 @@ cf-delete-all() {
     done
   fi
 
-  echo "🧹 Attempted to delete all tunnels. You may also remove leftover ~/.cloudflared/*.yml, *.json, and logs."
+  echo "Attempted to delete all tunnels. You may also remove leftover ~/.cloudflared/*.yml, *.json, and logs."
 }
 
 # ----------------------------------------------------
@@ -533,24 +533,24 @@ EOF
   _run() { if (( DRY )); then echo "DRY: $*"; else eval "$@"; fi }
 
   if ! command -v aws >/dev/null 2>&1; then
-    echo "ℹ️ AWS CLI not found; will install fresh."
+    echo "AWS CLI not found; will install fresh."
   else
     echo "🧾 Current: $(aws --version 2>&1)"
   fi
 
   if command -v brew >/dev/null 2>&1 && brew list --versions awscli >/dev/null 2>&1; then
-    echo "🍺 Detected Homebrew-managed awscli."
+    echo "Detected Homebrew-managed awscli."
     _run "brew update"
     _run "brew upgrade awscli"
   else
-    echo "📦 Using AWS bundled installer (pkg)."
+    echo "Using AWS bundled installer (pkg)."
     local TMPD PKGURL PKGFILE
     TMPD="$(mktemp -d)"
     PKGURL="https://awscli.amazonaws.com/AWSCLIV2.pkg"
     PKGFILE="$TMPD/AWSCLIV2.pkg"
     echo "⬇️  Downloading $PKGURL -> $PKGFILE"
     _run "curl -fsSL \"$PKGURL\" -o \"$PKGFILE\""
-    echo "📦 Installing pkg (requires admin)."
+    echo "Installing pkg (requires admin)."
     if (( YES )); then
       _run "sudo installer -pkg \"$PKGFILE\" -target /"
     else
@@ -570,7 +570,7 @@ EOF
 gcloud-upgrade() {
   if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
     cat <<'EOF'
-🧰 gcloud-upgrade
+gcloud-upgrade
 Upgrades Google Cloud SDK on macOS (supports Homebrew or built-in updater).
 
 Usage:
@@ -604,14 +604,14 @@ EOF
     return 1
   fi
 
-  echo "🧾 Current: $(gcloud --version 2>/dev/null | head -n1)"
+  echo "Current: $(gcloud --version 2>/dev/null | head -n1)"
 
   if command -v brew >/dev/null 2>&1 && brew list --cask --versions google-cloud-sdk >/dev/null 2>&1; then
-    echo "🍺 Detected Homebrew-managed google-cloud-sdk."
+    echo "Detected Homebrew-managed google-cloud-sdk."
     _run "brew update"
     _run "brew upgrade --cask google-cloud-sdk"
   else
-    echo "📦 Using gcloud's built-in updater."
+    echo "Using gcloud's built-in updater."
     if (( YES )); then
       _run "gcloud components update --quiet"
     else
@@ -640,6 +640,72 @@ load_secret() {
     fi
   fi
 }
+
+
+# ================================================================================
+# Homebrew Bundle helpers — freeze & restore your dev setup
+# Configure your repo location once (override per-machine if needed)
+export OSX_DEV_SETUP_DIR="${OSX_DEV_SETUP_DIR:-$HOME/osx-dev-setup}"
+# ================================================================================
+
+# brew-freeze [Brewfile]
+# Dump all installed taps, formulae, casks (and MAS apps if mas is installed) to a Brewfile.
+brew-freeze() {
+  local target="${1:-$OSX_DEV_SETUP_DIR/Brewfile}"
+  mkdir -p "$(dirname "$target")"
+  echo "Freezing current Homebrew state into: $target"
+  brew bundle dump --file="$target" --force --describe
+  echo "✅ Brewfile updated."
+  echo "   To restore on a new machine: brew-restore \"$target\""
+}
+
+# brew-restore [Brewfile]
+# Install everything from a Brewfile (non-destructive by default).
+brew-restore() {
+  local src="${1:-$OSX_DEV_SETUP_DIR/Brewfile}"
+  if [[ ! -f "$src" ]]; then
+    echo "❌ Brewfile not found: $src"
+    echo "   Create one with: brew-freeze"
+    return 1
+  fi
+  echo "⬇️  Restoring packages from: $src"
+  brew bundle --file="$src"      # apply without removing anything
+  echo "✅ Done."
+}
+
+# brew-missing [Brewfile]
+# Show what would be installed (does not install).
+brew-missing() {
+  local src="${1:-$OSX_DEV_SETUP_DIR/Brewfile}"
+  if [[ ! -f "$src" ]]; then
+    echo "❌ Brewfile not found: $src"
+    return 1
+  fi
+  echo "Checking missing items for: $src"
+  brew bundle check --file="$src" || true
+}
+
+# brew-outdated
+# List outdated formulae and casks (handy before freezing).
+brew-outdated() {
+  echo "Outdated formulae:"
+  brew outdated || true
+  echo
+  echo "Outdated casks:"
+  brew outdated --cask || true
+}
+
+# brew-cleanup-safe
+# Optional: reclaim disk space (does not uninstall current versions).
+brew-cleanup-safe() {
+  echo "Cleaning old versions & cache"
+  brew cleanup
+  brew autoremove || true
+}
+
+# Convenience aliases
+alias brew-freeze-default='brew-freeze "$OSX_DEV_SETUP_DIR/Brewfile"'
+alias brew-restore-default='brew-restore "$OSX_DEV_SETUP_DIR/Brewfile"'
 
 # ================================================================================
 # ✅ End of ~/.functions

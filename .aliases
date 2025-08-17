@@ -5,81 +5,125 @@
 # ================================================================================
 
 # -------------------------------------
-# 🛏️ System Control
+# System Control
 # -------------------------------------
-alias afk='pmset displaysleepnow'                          # Lock screen
-alias sleepnow='pmset sleepnow'                            # Sleep immediately
+alias afk='pmset displaysleepnow'            # Turn off display (lock if configured)
+alias sleepnow='pmset sleepnow'              # Sleep immediately
 
 # -------------------------------------
-# 📆 Date & Time
+# Date & Time
 # -------------------------------------
-alias week='date +%V'                                      # Get week number
-alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'  # Stopwatch
+alias week='date +%V'                        # ISO week number
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'  # Simple stopwatch
 
 # -------------------------------------
-# 🍺 System + Package Updates
+# System + Package Updates (safer wrappers)
 # -------------------------------------
-alias update='sudo softwareupdate -i -a -R; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update;'
-alias updatedb="sudo /usr/libexec/locate.updatedb"
-alias homebrew="brew upgrade; brew update; brew cleanup;"
+# NOTE: softwareupdate may reboot with -R. Keep it separate & interactive.
+sys-update-macos() {
+  echo "macOS updates (you may be prompted & a reboot may be required)"
+  sudo softwareupdate -ia --verbose
+}
+
+brew-upgrade-safe() {
+  echo "Homebrew: update/upgrade/cleanup/doctor"
+  brew update && brew upgrade && brew cleanup
+  brew doctor || true
+}
+
+npm-upgrade-global() {
+  echo "npm: ensure latest npm + upgrade globals"
+  npm install -g npm
+  # npm update -g is often noisy; prefer explicit tools as needed.
+  if command -v ncu >/dev/null 2>&1; then
+    echo "ℹ️  ncu (npm-check-updates) is installed. Use 'ncu -u' inside projects."
+  fi
+}
+
+gem-upgrade-safe() {
+  if command -v gem >/dev/null 2>&1; then
+    echo "RubyGems: upgrading"
+    gem update --system && gem update || true
+  fi
+}
+
+# quick roll-up (stays interactive; no reboots forced)
+alias update='sys-update-macos; brew-upgrade-safe; npm-upgrade-global; gem-upgrade-safe'
+alias updatedb='sudo /usr/libexec/locate.updatedb'
+alias homebrew='brew-upgrade-safe'
 
 # -------------------------------------
-# 🔒 Screen + Chrome Memory Management
+# Audio + Chrome Memory
 # -------------------------------------
 alias mute="osascript -e 'set volume output muted true'"
 alias unmute="osascript -e 'set volume 3'"
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# Kill all Chrome renderer helpers except extensions (more resilient)
+chromekill() {
+  # Try pkill first, fallback to ps/awk/xargs (macOS-safe)
+  pkill -f 'Chrome Helper --type=renderer' 2>/dev/null || \
+  ps aux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | awk '{print $2}' | xargs -r kill
+}
 
 # -------------------------------------
-# 💻 Terminal Utilities
+# Terminal Utilities
 # -------------------------------------
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-alias cursor='sh -c "[ -d \"/Applications/Cursor.app\" ] && open -a Cursor \"$@\" || echo \"Cursor app not found\"" _'
-alias kill-strapi-vite='lsof -ti :5173 | xargs kill -9'
+# Open Cursor if present (passes args)
+cursor() { if [[ -d "/Applications/Cursor.app" ]]; then open -a Cursor "$@"; else echo "Cursor app not found"; fi; }
+
+# Kill common dev ports (e.g., Vite/Strapi)
+alias kill-strapi-vite='lsof -ti :5173 | xargs -r kill -9'
 
 # -------------------------------------
-# 🚀 Node + NPM
+# Node + NPM
 # -------------------------------------
-# Prevent npm fund ads
-alias npm="npm --no-fund"
+# Reduce noise from npm "fund" prompts
+alias npm='npm --no-fund'
 
-# Backup global npm packages
-alias npm-backup='
-  NOW=$(date "+%Y-%m-%d_%H-%M-%S") && \
-  mkdir -p "$HOME/.npm-global-backups" && \
-  npm ls -g --depth=0 --json | jq -r ".dependencies | keys[]" \
-    > "$HOME/.npm-global-backups/npm-globals-$NOW.txt" && \
-  echo "📦 Backed up to: ~/.npm-global-backups/npm-globals-$NOW.txt"
-'
+# Snapshot global npm packages (for migration)
+npm-backup() {
+  local NOW FILE
+  NOW=$(date "+%Y-%m-%d_%H-%M-%S")
+  mkdir -p "$HOME/.npm-global-backups"
+  FILE="$HOME/.npm-global-backups/npm-globals-$NOW.txt"
+  echo "Saving global package list to: $FILE"
+  npm ls -g --depth=0 --json | jq -r '.dependencies | keys[]' > "$FILE"
+  echo "✅ Backed up to: $FILE"
+}
 
-# Restore npm globals from backup
+# Restore global npm packages from snapshot
 npm-restore() {
   local DIR="$HOME/.npm-global-backups"
   local FILE
-
   if [[ "$1" == "--help" ]]; then
-    echo "Usage: npm-restore [filename]"
-    echo ""
-    echo "Restores global npm packages from a backup file."
-    echo "- If no filename is provided, uses the latest backup."
-    echo ""
-    echo "Examples:"
-    echo "  npm-restore                     # Restore from latest"
-    echo "  npm-restore npm-globals-2025-07-30_14-36-20.txt"
+    cat <<'EOF'
+Usage: npm-restore [filename]
+
+Restores global npm packages from a backup file created by npm-backup.
+- If no filename is provided, uses the latest backup.
+
+Examples:
+  npm-restore                     # Restore from latest
+  npm-restore npm-globals-2025-07-30_14-36-20.txt
+EOF
     return 0
   fi
-
-  if [ "$1" ]; then
+  if [[ -n "$1" ]]; then
     FILE="$DIR/$1"
   else
     FILE=$(ls -t "$DIR"/npm-globals-*.txt 2>/dev/null | head -n 1)
   fi
-
-  if [ -z "$FILE" ] || [ ! -f "$FILE" ]; then
+  if [[ -z "$FILE" || ! -f "$FILE" ]]; then
     echo "❌ No backup file found. Use: npm-restore <filename>" >&2
     return 1
   fi
-
   echo "🔁 Restoring from: $FILE"
-  xargs npm install -g < "$FILE"
+  xargs -r npm install -g < "$FILE"
 }
+
+# -------------------------------------
+# 🔧 Misc QOL
+# -------------------------------------
+alias path='echo -e "${PATH//:/\n}"'
+alias whichall='type -a'
