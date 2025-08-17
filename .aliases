@@ -1,0 +1,85 @@
+# ================================================================================
+# ~/.aliases — Shell Aliases for macOS + Dev Tools
+# Maintainer: Sam @ Kids on the Yard
+# Purpose: Quick commands for macOS, Node, npm, cleanup, and daily development
+# ================================================================================
+
+# -------------------------------------
+# 🛏️ System Control
+# -------------------------------------
+alias afk='pmset displaysleepnow'                          # Lock screen
+alias sleepnow='pmset sleepnow'                            # Sleep immediately
+
+# -------------------------------------
+# 📆 Date & Time
+# -------------------------------------
+alias week='date +%V'                                      # Get week number
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'  # Stopwatch
+
+# -------------------------------------
+# 🍺 System + Package Updates
+# -------------------------------------
+alias update='sudo softwareupdate -i -a -R; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update;'
+alias updatedb="sudo /usr/libexec/locate.updatedb"
+alias homebrew="brew upgrade; brew update; brew cleanup;"
+
+# -------------------------------------
+# 🔒 Screen + Chrome Memory Management
+# -------------------------------------
+alias mute="osascript -e 'set volume output muted true'"
+alias unmute="osascript -e 'set volume 3'"
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# -------------------------------------
+# 💻 Terminal Utilities
+# -------------------------------------
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+alias cursor='sh -c "[ -d \"/Applications/Cursor.app\" ] && open -a Cursor \"$@\" || echo \"Cursor app not found\"" _'
+alias kill-strapi-vite='lsof -ti :5173 | xargs kill -9'
+
+# -------------------------------------
+# 🚀 Node + NPM
+# -------------------------------------
+# Prevent npm fund ads
+alias npm="npm --no-fund"
+
+# Backup global npm packages
+alias npm-backup='
+  NOW=$(date "+%Y-%m-%d_%H-%M-%S") && \
+  mkdir -p "$HOME/.npm-global-backups" && \
+  npm ls -g --depth=0 --json | jq -r ".dependencies | keys[]" \
+    > "$HOME/.npm-global-backups/npm-globals-$NOW.txt" && \
+  echo "📦 Backed up to: ~/.npm-global-backups/npm-globals-$NOW.txt"
+'
+
+# Restore npm globals from backup
+npm-restore() {
+  local DIR="$HOME/.npm-global-backups"
+  local FILE
+
+  if [[ "$1" == "--help" ]]; then
+    echo "Usage: npm-restore [filename]"
+    echo ""
+    echo "Restores global npm packages from a backup file."
+    echo "- If no filename is provided, uses the latest backup."
+    echo ""
+    echo "Examples:"
+    echo "  npm-restore                     # Restore from latest"
+    echo "  npm-restore npm-globals-2025-07-30_14-36-20.txt"
+    return 0
+  fi
+
+  if [ "$1" ]; then
+    FILE="$DIR/$1"
+  else
+    FILE=$(ls -t "$DIR"/npm-globals-*.txt 2>/dev/null | head -n 1)
+  fi
+
+  if [ -z "$FILE" ] || [ ! -f "$FILE" ]; then
+    echo "❌ No backup file found. Use: npm-restore <filename>" >&2
+    return 1
+  fi
+
+  echo "🔁 Restoring from: $FILE"
+  xargs npm install -g < "$FILE"
+}

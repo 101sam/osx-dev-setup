@@ -1,0 +1,648 @@
+# ================================================================================
+# ~/.functions
+# Author: Sam @ Kids on the Yard
+# Purpose: Developer shell helpers for Node.js, Express, NestJS, Next.js, and general CLI tasks
+# Created: 2025-08-07
+# ================================================================================
+
+unalias reload 2>/dev/null
+
+# ================================================================================
+# 🔍 findenv — Search recursively in .env and .env.* files
+# ================================================================================
+findenv() {
+  if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+    echo -e "\nUsage:\n  findenv <search_string> [--show-lines] [--count] [--json]"
+    echo "Description: Searches all .env* files recursively while excluding build and cache folders."
+    echo "Options:"
+    echo "  --show-lines   Show matching lines"
+    echo "  --count        Count occurrences per file"
+    echo "  --json         JSON formatted output"
+    echo "Example:"
+    echo "  findenv DATABASE_URL"
+    return 0
+  fi
+
+  local SEARCH_STRING=""
+  local MODE=""
+  local JSON_OUTPUT=0
+
+  for arg in "$@"; do
+    case $arg in
+      --show-lines) MODE="-rin" ;;
+      --count) MODE="--count" ;;
+      --json) JSON_OUTPUT=1 ;;
+      *) [[ -z "$SEARCH_STRING" ]] && SEARCH_STRING="$arg" ;;
+    esac
+  done
+
+  local EXCLUDES=(--exclude-dir={node_modules,build,dist,.next,.turbo,.vscode,.github,.git,.cache,.output,.vercel,.pnpm-store,.idea,coverage})
+
+  if [[ "$JSON_OUTPUT" == "1" ]]; then
+    grep -ril --include=".env*" "${EXCLUDES[@]}" "$SEARCH_STRING" . | jq -R '{file: ., match: true}' | jq -s
+  elif [[ "$MODE" == "--count" ]]; then
+    grep -ril --include=".env*" "${EXCLUDES[@]}" "$SEARCH_STRING" . | while read -r file; do
+      count=$(grep -o "$SEARCH_STRING" "$file" | wc -l)
+      echo "$file: $count"
+    done
+  else
+    grep ${MODE:-"-ril"} --color=always --include=".env*" "${EXCLUDES[@]}" "$SEARCH_STRING" . || echo "❌ No matches found."
+  fi
+}
+
+# ================================================================================
+# 🔍 findin — Generic file search with pattern and exclusions
+# ================================================================================
+findin() {
+  if [[ "$1" == "--help" || "$1" == "-h" || $# -lt 1 ]]; then
+    echo -e "\nUsage:\n  findin <search_string> [--pattern='*.ts'] [--dir=.] [--exclude='node_modules,.git'] [--show-lines] [--count] [--json]"
+    echo "Description: Flexible grep-based search for any file type or path."
+    echo "Example:"
+    echo "  findin SECRET_KEY --pattern='.env*'"
+    echo "  findin password --pattern='*.ts' --dir=src --exclude='node_modules,dist'"
+    return 0
+  fi
+
+  local SEARCH_STRING=""
+  local FILE_PATTERN="*.*"
+  local SEARCH_DIR="."
+  local EXCLUDE_DIRS=""
+  local MODE=""
+  local JSON_OUTPUT=0
+
+  for arg in "$@"; do
+    case $arg in
+      --pattern=*) FILE_PATTERN="${arg#*=}" ;;
+      --dir=*) SEARCH_DIR="${arg#*=}" ;;
+      --exclude=*) EXCLUDE_DIRS="${arg#*=}" ;;
+      --show-lines) MODE="-rin" ;;
+      --count) MODE="--count" ;;
+      --json) JSON_OUTPUT=1 ;;
+      *) [[ -z "$SEARCH_STRING" ]] && SEARCH_STRING="$arg" ;;
+    esac
+  done
+
+  local EXCLUDES=()
+  if [[ -n "$EXCLUDE_DIRS" ]]; then
+    IFS=',' read -ra DIRS <<< "$EXCLUDE_DIRS"
+    for dir in "${DIRS[@]}"; do
+      EXCLUDES+=(--exclude-dir="$dir")
+    done
+  fi
+
+  if [[ "$JSON_OUTPUT" == "1" ]]; then
+    grep -ril --include="$FILE_PATTERN" "${EXCLUDES[@]}" "$SEARCH_STRING" "$SEARCH_DIR" | jq -R '{file: ., match: true}' | jq -s
+  elif [[ "$MODE" == "--count" ]]; then
+    grep -ril --include="$FILE_PATTERN" "${EXCLUDES[@]}" "$SEARCH_STRING" "$SEARCH_DIR" | while read -r file; do
+      count=$(grep -o "$SEARCH_STRING" "$file" | wc -l)
+      echo "$file: $count"
+    done
+  else
+    grep ${MODE:-"-ril"} --color=always --include="$FILE_PATTERN" "${EXCLUDES[@]}" "$SEARCH_STRING" "$SEARCH_DIR" || echo "❌ No matches found."
+  fi
+}
+
+# ================================================================================
+# 🔧 serve — Start a quick static server (great for Next.js .out/, docs, or dist)
+# ================================================================================
+serve() {
+  local PORT=${1:-5000}
+  echo "🌐 Serving current directory at http://localhost:$PORT"
+  python3 -m http.server "$PORT"
+}
+
+# ================================================================================
+# 🧹 npmclean — Recursively remove node_modules and lock files (use with care!)
+# ================================================================================
+npmclean() {
+  echo "🧹 Cleaning node_modules and lock files..."
+  find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
+  find . \( -name "package-lock.json" -o -name "yarn.lock" -o -name "pnpm-lock.yaml" \) -exec rm -f {} +
+}
+
+# ================================================================================
+# 🔁 reload — Reload shell configuration (.zshrc, etc.)
+# ================================================================================
+reload() {
+  echo "🔄 Reloading .zshrc and ~/.functions..."
+  source ~/.zshrc && echo "✅ Reload complete."
+}
+
+# ================================================================================
+# 🔎 ports — List all open ports with listening processes
+# ================================================================================
+ports() {
+  echo "🔌 Listening ports:"
+  lsof -i -P -n | grep LISTEN
+}
+
+# ================================================================================
+# 🛑 killport — Kill process using a specific port
+# ================================================================================
+killport() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: killport <port>"
+    return 1
+  fi
+  fuser -k "$1"/tcp || lsof -ti tcp:"$1" | xargs kill -9
+  echo "🛑 Port $1 killed."
+}
+
+# ================================================================================
+# 📖 jsonpp — Pretty print JSON file or string using jq
+# ================================================================================
+jsonpp() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: jsonpp <file|json_string>"
+    return 1
+  fi
+  echo "$1" | jq . 2>/dev/null || jq . "$1"
+}
+
+# ================================================================================
+# 🧠 gitwho — See who edited a file the most (git blame summary)
+# ================================================================================
+gitwho() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: gitwho <file>"
+    return 1
+  fi
+  git blame "$1" | cut -d'(' -f2 | cut -d' ' -f1 | sort | uniq -c | sort -nr
+}
+
+# ================================================================================
+# ⏱️ now — Show current UTC timestamp in various formats
+# ================================================================================
+now() {
+  echo "🕒 UTC Now: $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+  echo "Date Only: $(date -u '+%Y-%m-%d')"
+  echo "Unix Time: $(date -u '+%s')"
+}
+
+# ================================================================================
+# 🧪 testapi — Curl a local API with method, headers, and optional JSON
+# ================================================================================
+testapi() {
+  if [[ $# -lt 2 ]]; then
+    echo "Usage: testapi <GET|POST|PUT|DELETE> <url> [json_file]"
+    echo "Example:"
+    echo "  testapi POST http://localhost:3000/api/auth login.json"
+    return 1
+  fi
+
+  METHOD=$1
+  URL=$2
+  DATA_OPT=""
+  if [[ -n "$3" ]]; then
+    DATA_OPT="--data @$3"
+  fi
+
+  curl -X "$METHOD" "$URL" \
+    -H "Content-Type: application/json" \
+    $DATA_OPT
+}
+
+
+# =================================================================================================
+# Kids on the Yard – Cloudflare Tunnel helpers (functions)
+# File: ~/.functions  (append this block near the end, above your "End of ~/.functions" comment)
+# -------------------------------------------------------------------------------------------------
+# Overview:
+#   These functions replace the standalone scripts:
+#     - cloudflare-create-tunnel.sh      -> cf-create
+#     - cloudflare-start-tunnel.sh       -> cf-start
+#     - cloudflare-delete-tunnel.sh      -> cf-delete
+#     - cloudflare-delete-all-tunnels.sh -> cf-delete-all
+#
+# Conventions:
+#   - Tunnel name is the same as the local <PORT>.
+#   - Config lives at:   ~/.cloudflared/<PORT>.yml
+#   - Log file (opt.):   ~/.cloudflared/<PORT>.log
+#   - Hostname becomes:  <PORT>.$CF_BASE_DOMAIN  (defaults to 101sam.com)
+#
+# Requirements:
+#   - cloudflared installed and logged in at least once (creates ~/.cloudflared/cert.pem)
+#     > brew install cloudflared
+#     > cloudflared login
+#   - jq optional (for nicer JSON parsing in cf-delete-all)
+#
+# Quick examples:
+#   cf-create 3072                   # create tunnel + DNS + config for http://localhost:3072
+#   cf-start 3072                    # start it (stream logs to stdout)
+#   cf-start 3072 --log              # start it and write logs to ~/.cloudflared/3072.log
+#   cf-delete 3072                   # delete the 3072 tunnel + local files
+#   cf-delete-all --force            # delete ALL tunnels without prompt (careful!)
+#
+# Notes:
+#   - You can override the base domain via: export CF_BASE_DOMAIN="example.com"
+#   - For non-HTTP services, adjust the generated ingress in the config file after cf-create.
+# =================================================================================================
+
+# ---- Internal helpers --------------------------------------------------------------------------------
+
+_cf_domain() {
+  # Default to 101sam.com unless CF_BASE_DOMAIN is set
+  echo "${CF_BASE_DOMAIN:-101sam.com}"
+}
+
+_cf_validate_port() {
+  local _p="$1"
+  if ! [[ "$_p" =~ ^[0-9]+$ ]] || (( _p < 1 || _p > 65535 )); then
+    echo "❌ Invalid port: $_p" >&2
+    return 1
+  fi
+}
+
+_cf_paths() {
+  # Sets globals: PORT, TUNNEL_NAME, CF_DIR, CFG, LOG, HOSTNAME
+  PORT="$1"
+  TUNNEL_NAME="$PORT"
+  CF_DIR="$HOME/.cloudflared"
+  CFG="$CF_DIR/${PORT}.yml"
+  LOG="$CF_DIR/${PORT}.log"
+  HOSTNAME="${PORT}.$(_cf_domain)"
+}
+
+_cf_require_cloudflared() {
+  command -v cloudflared >/dev/null 2>&1 || {
+    echo "❌ cloudflared not found. Install with: brew install cloudflared" >&2
+    return 1
+  }
+}
+
+_cf_require_cert() {
+  if [[ ! -f "$HOME/.cloudflared/cert.pem" ]]; then
+    echo "❌ ~/.cloudflared/cert.pem not found. Run: cloudflared login" >&2
+    return 1
+  fi
+}
+
+# Write a minimal config file for HTTP service on localhost:<PORT>
+_cf_write_cfg() {
+  local _cfg="$1"
+  local _tunnel_name="$2"
+  local _hostname="$3"
+  # We use named tunnel; cloudflared keeps credentials in ~/.cloudflared/<UUID>.json
+  cat >"$_cfg" <<YAML
+tunnel: ${_tunnel_name}
+credentials-file: ${HOME}/.cloudflared/${_tunnel_name}.json
+
+ingress:
+  - hostname: ${_hostname}
+    service: http://localhost:${_tunnel_name}
+  - service: http_status:404
+YAML
+}
+
+# Resolve tunnel UUID for a tunnel name (blank if not found)
+_cf_tunnel_id() {
+  # cloudflared supports --output json on recent builds; fall back to table if unavailable
+  if cloudflared tunnel list --output json >/dev/null 2>&1; then
+    cloudflared tunnel list --output json | jq -r --arg n "$1" '.[] | select(.name==$n) | .id' 2>/dev/null
+  else
+    # Table: first column is NAME; no UUID exposed directly
+    # We'll return empty to allow DNS routing by name anyway.
+    echo ""
+  fi
+}
+
+# ---- Public functions --------------------------------------------------------------------------------
+
+cf-create() {
+  # Create a named tunnel (name = <PORT>), add DNS, and write ~/.cloudflared/<PORT>.yml ingress.
+  # Usage: cf-create <PORT>
+  if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]]; then
+    cat <<EOF
+📦 Create Cloudflare Tunnel
+
+Usage:
+  cf-create <PORT>
+
+Creates a named tunnel "<PORT>" pointing to http://localhost:<PORT> and a DNS record:
+  https://<PORT>.$(_cf_domain)
+
+Then writes config at:
+  ~/.cloudflared/<PORT>.yml
+
+Example:
+  cf-create 3072
+EOF
+    return 0
+  fi
+
+  local PORT="$1"
+  _cf_validate_port "$PORT" || return 1
+  _cf_require_cloudflared || return 1
+  _cf_require_cert || return 1
+  _cf_paths "$PORT"
+
+  mkdir -p "$CF_DIR"
+
+  # Create tunnel if not exists
+  if cloudflared tunnel list 2>/dev/null | awk 'NR>1{print $1}' | grep -qx "$TUNNEL_NAME"; then
+    echo "ℹ️  Tunnel '$TUNNEL_NAME' already exists. Skipping creation."
+  else
+    echo "🔧 Creating tunnel '$TUNNEL_NAME'…"
+    cloudflared tunnel create "$TUNNEL_NAME" || {
+      echo "❌ Failed creating tunnel '$TUNNEL_NAME'."
+      return 1
+    }
+  fi
+
+  # Write config file (idempotent)
+  _cf_write_cfg "$CFG" "$TUNNEL_NAME" "$HOSTNAME"
+  echo "📝 Wrote config: $CFG"
+
+  # Route DNS (creates/updates CNAME for HOSTNAME to the tunnel)
+  echo "🌐 Creating/Updating DNS route: $HOSTNAME → tunnel '$TUNNEL_NAME'"
+  cloudflared tunnel route dns "$TUNNEL_NAME" "$HOSTNAME" || {
+    echo "⚠️  DNS route command failed. Ensure your Cloudflare account has access to $(_cf_domain)."
+  }
+
+  echo "✅ Done. Start it with: cf-start $PORT   (or cf-start $PORT --log)"
+  echo "   Visit: https://$HOSTNAME"
+}
+
+cf-start() {
+  # Start an existing tunnel by name (= <PORT>)
+  # Usage: cf-start <PORT> [--log]
+  if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]]; then
+    cat <<'EOF'
+▶️  Start Cloudflare Tunnel
+
+Usage:
+  cf-start <PORT> [--log]
+
+Examples:
+  cf-start 3072
+  cf-start 3072 --log
+EOF
+    return 0
+  fi
+
+  local PORT="$1"
+  local LOG_ENABLED=false
+  [[ "${2:-}" == "--log" ]] && LOG_ENABLED=true
+
+  _cf_validate_port "$PORT" || return 1
+  _cf_paths "$PORT"
+  _cf_require_cloudflared || return 1
+
+  if [[ ! -f "$CFG" ]]; then
+    echo "❌ Config file not found: $CFG"
+    echo "   Create it with: cf-create $PORT"
+    return 1
+  fi
+
+  echo "🚀 Starting tunnel '$TUNNEL_NAME' with config: $CFG"
+  echo "🌐 URL: https://$HOSTNAME"
+
+  local NOW
+  NOW=$(date "+%Y-%m-%d %H:%M:%S")
+
+  if $LOG_ENABLED; then
+    echo "🪵 Logging to: $LOG"
+    echo "[$NOW] Starting tunnel: $TUNNEL_NAME" >> "$LOG"
+    cloudflared tunnel --config "$CFG" run "$TUNNEL_NAME" | \
+      while IFS= read -r line; do
+        printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$line" | tee -a "$LOG"
+      done
+  else
+    cloudflared tunnel --config "$CFG" run "$TUNNEL_NAME"
+  fi
+}
+
+cf-delete() {
+  # Delete a tunnel (name = <PORT>) and cleanup local files
+  # Usage: cf-delete <PORT>
+  if [[ "${1:-}" == "-h" || "${1:-}" == "--help" || $# -lt 1 ]]; then
+    echo "Usage: cf-delete <PORT>"
+    return 0
+  fi
+
+  local PORT="$1"
+  _cf_validate_port "$PORT" || return 1
+  _cf_paths "$PORT"
+  _cf_require_cloudflared || return 1
+
+  echo "🧨 Deleting tunnel '$TUNNEL_NAME'…"
+  if cloudflared tunnel delete -f "$TUNNEL_NAME"; then
+    echo "✅ Tunnel deleted in Cloudflare."
+  else
+    echo "⚠️  Could not delete tunnel '$TUNNEL_NAME' (may not exist)."
+  fi
+
+  # Remove local files
+  local CREDS_JSON="$HOME/.cloudflared/${TUNNEL_NAME}.json"
+  [[ -f "$CFG" ]] && { rm -f "$CFG"; echo "🧹 Removed $CFG"; }
+  [[ -f "$LOG" ]] && { rm -f "$LOG"; echo "🧹 Removed $LOG"; }
+  [[ -f "$CREDS_JSON" ]] && { rm -f "$CREDS_JSON"; echo "🧹 Removed $CREDS_JSON (credentials)"; }
+}
+
+cf-delete-all() {
+  # Delete ALL tunnels in the account (asks for confirmation unless --force)
+  # Usage: cf-delete-all [--force]
+  local FORCE=false
+  [[ "${1:-}" == "--force" ]] && FORCE=true
+
+  _cf_require_cloudflared || return 1
+
+  if ! $FORCE; then
+    read -r -p "⚠️  This deletes ALL Cloudflare tunnels in your account. Continue? (yes/NO) " ans
+    [[ "$ans" == "yes" ]] || { echo "🚫 Aborted."; return 1; }
+  fi
+
+  if cloudflared tunnel list --output json >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
+    cloudflared tunnel list --output json | jq -r '.[].name' | while read -r name; do
+      [[ -n "$name" ]] && cloudflared tunnel delete -f "$name"
+    done
+  else
+    cloudflared tunnel list | awk 'NR>1 {print $1}' | while read -r name; do
+      [[ -n "$name" ]] && cloudflared tunnel delete -f "$name"
+    done
+  fi
+
+  echo "🧹 Attempted to delete all tunnels. You may also remove leftover ~/.cloudflared/*.yml, *.json, and logs."
+}
+
+# ----------------------------------------------------
+# Extra Cloudflare quality-of-life helpers
+# ----------------------------------------------------
+
+cf-list() {
+  if cloudflared tunnel list --output json >/dev/null 2>&1 && command -v jq >/dev/null 2>&1; then
+    cloudflared tunnel list --output json | jq -r '.[] | "\(.name)\t\(.id)\t\(.created_at)\t\(.connections[0].status // \"-\")"'
+  else
+    cloudflared tunnel list
+  fi
+}
+
+cf-open() {
+  if [[ -z "$1" ]]; then echo "Usage: cf-open <PORT>"; return 1; fi
+  local HOST="${1}.${CF_BASE_DOMAIN:-101sam.com}"
+  if command -v open >/dev/null 2>&1; then open "https://${HOST}"; else xdg-open "https://${HOST}"; fi
+}
+
+cf-log-tail() {
+  if [[ -z "$1" ]]; then echo "Usage: cf-log-tail <PORT>"; return 1; fi
+  local LOG="$HOME/.cloudflared/${1}.log"
+  [[ -f "$LOG" ]] && tail -f "$LOG" || echo "No log at $LOG (start with --log first)."
+}
+
+# alias for convenience start with log
+alias cf-start-log='cf-start "$1" --log'
+
+# ================================================================================
+# ☁️ CLI Upgraders & Extra Utilities
+# Paste below your Cloudflare helpers in ~/.functions, then `source ~/.functions`
+# ================================================================================
+
+# -------------------------------
+# awscli-upgrade — macOS-focused
+# -------------------------------
+awscli-upgrade() {
+  if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    cat <<'EOF'
+🧰 awscli-upgrade
+Upgrades AWS CLI v2 on macOS (supports Homebrew or AWS bundled installer).
+
+Usage:
+  awscli-upgrade [--yes] [--dry-run] [--verbose]
+
+Options:
+  --yes       Non-interactive (no prompts)
+  --dry-run   Show what would run, but don't execute
+  --verbose   Extra output
+
+Examples:
+  awscli-upgrade
+  awscli-upgrade --yes --verbose
+EOF
+    return 0
+  fi
+
+  local YES=0 DRY=0 VERBOSE=0
+  for a in "$@"; do
+    case "$a" in
+      --yes) YES=1 ;;
+      --dry-run) DRY=1 ;;
+      --verbose) VERBOSE=1 ;;
+    esac
+  done
+
+  _run() { if (( DRY )); then echo "DRY: $*"; else eval "$@"; fi }
+
+  if ! command -v aws >/dev/null 2>&1; then
+    echo "ℹ️ AWS CLI not found; will install fresh."
+  else
+    echo "🧾 Current: $(aws --version 2>&1)"
+  fi
+
+  if command -v brew >/dev/null 2>&1 && brew list --versions awscli >/dev/null 2>&1; then
+    echo "🍺 Detected Homebrew-managed awscli."
+    _run "brew update"
+    _run "brew upgrade awscli"
+  else
+    echo "📦 Using AWS bundled installer (pkg)."
+    local TMPD PKGURL PKGFILE
+    TMPD="$(mktemp -d)"
+    PKGURL="https://awscli.amazonaws.com/AWSCLIV2.pkg"
+    PKGFILE="$TMPD/AWSCLIV2.pkg"
+    echo "⬇️  Downloading $PKGURL -> $PKGFILE"
+    _run "curl -fsSL \"$PKGURL\" -o \"$PKGFILE\""
+    echo "📦 Installing pkg (requires admin)."
+    if (( YES )); then
+      _run "sudo installer -pkg \"$PKGFILE\" -target /"
+    else
+      read -r -p "Proceed installing AWS CLI v2 from pkg? (yes/NO) " ans
+      [[ "$ans" == "yes" ]] && _run "sudo installer -pkg \"$PKGFILE\" -target /" || echo "🚫 Aborted."
+    fi
+    (( DRY )) || rm -rf "$TMPD"
+  fi
+
+  echo "✅ Done. Version now:"
+  _run "aws --version"
+}
+
+# ------------------------------------------
+# gcloud-upgrade — Google Cloud SDK (macOS)
+# ------------------------------------------
+gcloud-upgrade() {
+  if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    cat <<'EOF'
+🧰 gcloud-upgrade
+Upgrades Google Cloud SDK on macOS (supports Homebrew or built-in updater).
+
+Usage:
+  gcloud-upgrade [--yes] [--dry-run] [--verbose]
+
+Options:
+  --yes       Non-interactive (accept prompts)
+  --dry-run   Show what would run, but don't execute
+  --verbose   Extra output
+
+Examples:
+  gcloud-upgrade
+  gcloud-upgrade --yes --verbose
+EOF
+    return 0
+  fi
+
+  local YES=0 DRY=0 VERBOSE=0
+  for a in "$@"; do
+    case "$a" in
+      --yes) YES=1 ;;
+      --dry-run) DRY=1 ;;
+      --verbose) VERBOSE=1 ;;
+    esac
+  done
+
+  _run() { if (( DRY )); then echo "DRY: $*"; else eval "$@"; fi }
+
+  if ! command -v gcloud >/dev/null 2>&1; then
+    echo "❌ gcloud not found. Install via Homebrew: 'brew install --cask google-cloud-sdk'"
+    return 1
+  fi
+
+  echo "🧾 Current: $(gcloud --version 2>/dev/null | head -n1)"
+
+  if command -v brew >/dev/null 2>&1 && brew list --cask --versions google-cloud-sdk >/dev/null 2>&1; then
+    echo "🍺 Detected Homebrew-managed google-cloud-sdk."
+    _run "brew update"
+    _run "brew upgrade --cask google-cloud-sdk"
+  else
+    echo "📦 Using gcloud's built-in updater."
+    if (( YES )); then
+      _run "gcloud components update --quiet"
+    else
+      _run "gcloud components update"
+    fi
+  fi
+
+  echo "✅ Done. Version now:"
+  _run "gcloud --version | head -n1"
+}
+
+# Load a secret from a file into an env var.
+# Usage: load_secret VAR_NAME /path/to/file [--required]
+load_secret() {
+  local var="$1" file="$2" required="${3:-}"
+  if [[ -r "$file" ]]; then
+    # strip potential trailing CR/LF
+    local val; val="$(<"$file")"; val="${val%%$'\r'}"
+    export "$var=$val"
+  else
+    if [[ "$required" == "--required" ]]; then
+      echo "Error: $file not found or not readable; $var unset" >&2
+      return 1
+    else
+      echo "Warning: $file not found or not readable; $var unset"
+    fi
+  fi
+}
+
+# ================================================================================
+# ✅ End of ~/.functions
+# Run `source ~/.functions` or reload terminal to apply.
+# Run `findenv --help` or `findin --help` for details.
+# ================================================================================
