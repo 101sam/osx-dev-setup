@@ -2,7 +2,8 @@
 # ~/.functions
 # Author: Sam @ Kids on the Yard
 # Purpose: Developer shell helpers for Node.js, Express, NestJS, Next.js, and general CLI tasks
-# Created: 2025-08-07
+# https://github.com/101sam/osx-dev-setup
+# Last update: 2025-08-17
 # ================================================================================
 
 unalias reload 2>/dev/null
@@ -503,7 +504,7 @@ alias cf-start-log='cf-start "$1" --log'
 awscli-upgrade() {
   if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
     cat <<'EOF'
-🧰 awscli-upgrade
+awscli-upgrade
 Upgrades AWS CLI v2 on macOS (supports Homebrew or AWS bundled installer).
 
 Usage:
@@ -535,7 +536,7 @@ EOF
   if ! command -v aws >/dev/null 2>&1; then
     echo "AWS CLI not found; will install fresh."
   else
-    echo "🧾 Current: $(aws --version 2>&1)"
+    echo "Current: $(aws --version 2>&1)"
   fi
 
   if command -v brew >/dev/null 2>&1 && brew list --versions awscli >/dev/null 2>&1; then
@@ -708,7 +709,7 @@ alias brew-freeze-default='brew-freeze "$OSX_DEV_SETUP_DIR/Brewfile"'
 alias brew-restore-default='brew-restore "$OSX_DEV_SETUP_DIR/Brewfile"'
 
 # ================================================================================
-# ✅ End of ~/.functions
+# End of ~/.functions
 # Run `source ~/.functions` or reload terminal to apply.
 # Run `findenv --help` or `findin --help` for details.
 # ================================================================================
